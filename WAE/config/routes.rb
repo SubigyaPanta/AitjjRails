@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  root 'home#index'
+
+  get 'ps_one/index'
+
+  #get 'home/index'
 
   get 'youtube/fetch'
 
