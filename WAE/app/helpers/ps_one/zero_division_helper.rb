@@ -1,0 +1,2 @@
+module PsOne::ZeroDivisionHelper
+end

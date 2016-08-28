@@ -1,4 +1,4 @@
-class YoutubeController < ApplicationController
+class PsOne::YoutubeController < ApplicationController
   def fetch
     #require 'rubygems'
     #require 'nokogiri'
