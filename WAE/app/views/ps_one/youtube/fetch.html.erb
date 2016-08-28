@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <h1>Top 10 Youtube trend</h1>
 <body>
-<%begin%>
 <% @i = 1%>
 <% @page.css('a.yt-uix-sessionlink.yt-uix-tile-link.yt-ui-ellipsis.yt-ui-ellipsis-2.spf-link').take(10).each do |el| %>
     <p>No.<%= @i %></p>
@@ -13,8 +12,4 @@
     <img src="<%= @imglink = "https://img.youtube.com/vi/"+@img+"/0.jpg" %>"><br>
     <% @i = @i+1 %>
     <% end%>
-  <%rescue Exception%>
-  <%=puts=("About to devide by 0")%>
-
-<% end %>
 </body>
