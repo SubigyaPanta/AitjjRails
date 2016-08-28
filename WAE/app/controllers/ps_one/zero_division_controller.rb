@@ -2,10 +2,11 @@ class PsOne::ZeroDivisionController < ApplicationController
   def index
     @divideByZero = "No Divide by Zero.";
     begin
-      logger.debug "About to divide by zero"
+      logger.error "About to divide by zero"
       @hello = 1/0;
-    rescue ZeroDivisionError
-      @divideByZero = "Divide by Zero Exception ocured";
+    rescue ZeroDivisionError => ex
+      @divideByZero = "Divide by Zero Exception ocured"
+      @trace = ex.backtrace.join("\r\n")
     end
   end
 end
