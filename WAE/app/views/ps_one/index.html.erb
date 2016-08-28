@@ -3,6 +3,15 @@
 <p>Find me in app/views/ps_one/index.html.erb</p>
 
 <ol>
-  <li><a href ="youtube/fetch.html">Top 10 Youtube trend</a></li>
-  <li><a href="http://validator.w3.org/check?uri=">XHTML</a></li>
+  <li><%= link_to("Top 10 YouTube trending", "youtube/fetch") %></li>
+  <li><%= link_to("Zero Division", "zero_division/index")%></li>
+  <li><%= link_to("XHTML Validation", "http://validator.w3.org/check?uri=" + request.original_url) %></li>
 </ol>
+
+<div id="project-resources">
+  Resources used:
+  <ul>
+    <li><a href="http://www.stackoverflow.com">Stackoverflow</a></li>
+    <li><a href="http://guides.rubyonrails.org">Rubyonrails Guide</a></li>
+  </ul>
+</div>

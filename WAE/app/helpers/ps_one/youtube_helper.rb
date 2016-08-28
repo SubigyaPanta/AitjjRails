@@ -1,0 +1,2 @@
+module PsOne::YoutubeHelper
+end

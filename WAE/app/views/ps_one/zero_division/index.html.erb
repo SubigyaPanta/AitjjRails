@@ -1,2 +1,12 @@
-<h1>PsOne::ZeroDivision#index</h1>
+<h1>Zero Division</h1>
 <p>Find me in app/views/ps_one/zero_division/index.html.erb</p>
+<p><%= @divideByZero %></p>
+
+<div>
+  <h3>How Divide by zero error handling and logging works</h3>
+  <p>We have used standard Ruby Exception handling class "ZeroDivisionError" to catch/rescue divide by zero error.
+    Whenever such problem arises in the program an error is thrown/raised and the rescue block is executed for
+    appropriate recovery from the situation.</p>
+  <p>Rails also has a default logging class i.e "ActiveSupport::Logger" class to write log information. We have simply
+    called that class to log "About to divide by zero" in log file. No extra information is saved.</p>
+</div>
