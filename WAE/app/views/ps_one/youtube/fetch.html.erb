@@ -4,14 +4,14 @@
 <h1>Top 10 Youtube trend</h1>
 <body>
 <% @i = 1%>
-<% @page.css('a.yt-uix-sessionlink.yt-uix-tile-link.yt-ui-ellipsis.yt-ui-ellipsis-2.spf-link').take(10).each do |el| %>
+<% @trending.each do |el| %>
     <p>No.<%= @i %></p>
     <%= @title = "Title:  "+el.text %><br>
     <a href="<%= @link = "http://www.youtube.com"+ el['href'] %>"><%= @link = "http://www.youtube.com"+ el['href'] %></a><br>
     <% @img = el['href'][9..19] %>
     <img src="<%= @imglink = "https://img.youtube.com/vi/"+@img+"/0.jpg" %>"><br>
     <% @i = @i+1 %>
-    <% end%>
+<% end%>
 
 <div>
   <h3>How it works?</h3>
