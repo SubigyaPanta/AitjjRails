@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ps_two_authors: one
+  ps_two_categories: one
+  quote: MyText
+
+two:
+  ps_two_authors: two
+  ps_two_categories: two
+  quote: MyText

@@ -10,9 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160903094726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "ps_two_authors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ps_two_categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ps_two_quotations", force: :cascade do |t|
+    t.integer  "ps_two_authors_id"
+    t.integer  "ps_two_categories_id"
+    t.text     "quote"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["ps_two_authors_id"], name: "index_ps_two_quotations_on_ps_two_authors_id", using: :btree
+    t.index ["ps_two_categories_id"], name: "index_ps_two_quotations_on_ps_two_categories_id", using: :btree
+  end
+
+  add_foreign_key "ps_two_quotations", "ps_two_authors", column: "ps_two_authors_id"
+  add_foreign_key "ps_two_quotations", "ps_two_categories", column: "ps_two_categories_id"
 end

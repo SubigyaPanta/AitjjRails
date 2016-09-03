@@ -1,0 +1,2 @@
+module PsTwo::QuotationsHelper
+end

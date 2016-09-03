@@ -1,0 +1,1 @@
+json.array! @ps_two_quotations, partial: 'ps_two_quotations/ps_two_quotation', as: :ps_two_quotation

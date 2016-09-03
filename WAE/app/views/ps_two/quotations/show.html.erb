@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ps two authors:</strong>
+  <%= @ps_two_quotation.ps_two_authors %>
+</p>
+
+<p>
+  <strong>Ps two categories:</strong>
+  <%= @ps_two_quotation.ps_two_categories %>
+</p>
+
+<p>
+  <strong>Quote:</strong>
+  <%= @ps_two_quotation.quote %>
+</p>
+
+<%= link_to 'Edit', edit_ps_two_quotation_path(@ps_two_quotation) %> |
+<%= link_to 'Back', ps_two_quotations_path %>

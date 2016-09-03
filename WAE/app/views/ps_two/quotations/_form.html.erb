@@ -1,0 +1,32 @@
+<%= form_for(ps_two_quotation) do |f| %>
+  <% if ps_two_quotation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ps_two_quotation.errors.count, "error") %> prohibited this ps_two_quotation from being saved:</h2>
+
+      <ul>
+      <% ps_two_quotation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ps_two_authors_id %>
+    <%= f.text_field :ps_two_authors_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ps_two_categories_id %>
+    <%= f.text_field :ps_two_categories_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :quote %>
+    <%= f.text_area :quote %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
