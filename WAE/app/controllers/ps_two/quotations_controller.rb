@@ -4,12 +4,22 @@ class PsTwo::QuotationsController < ApplicationController
   # GET /ps_two/quotations
   # GET /ps_two/quotations.json
   def index
-    @ps_two_quotations = PsTwo::Quotation.all
+    if(params[:search] == nil)
+      @ps_two_quotations = PsTwo::Quotation.all
+    else
+      searchString = params[:search]
+      @ps_two_quotations = PsTwo::Quotation.where(["quote ILIKE ?", '%'+searchString+'%'])
+    end
+
   end
 
   # GET /ps_two/quotations/1
   # GET /ps_two/quotations/1.json
   def show
+  end
+
+  def search
+
   end
 
   # GET /ps_two/quotations/new

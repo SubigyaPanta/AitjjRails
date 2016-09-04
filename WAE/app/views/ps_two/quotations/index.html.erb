@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>All Quotations</h1>
+<h1>Quotations</h1>
 
+<%= form_tag(ps_two_quotations_path, method: "get") do %>
+  <%= label_tag(:search, "Search") %>
+  <%= text_field_tag(:search) %>
+  <%= submit_tag("Go") %>
+<% end %>
 <table>
   <thead>
     <tr>
