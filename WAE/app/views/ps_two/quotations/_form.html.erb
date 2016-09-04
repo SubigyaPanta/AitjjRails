@@ -16,7 +16,7 @@
     <%#= f.text_field :ps_two_authors_id %>
     <%#= f.collection_select(:ps_two_authors_id, PsTwo::Author.all + [PsTwo::Author.new(id: -1, name: "New Author")], :id, :name, {:selected =>'-1'}) %>
     <%= f.collection_select(:ps_two_authors_id, PsTwo::Author.all + [PsTwo::Author.new(id: -1, name: "New Author")], :id, :name) %>
-    <%= text_field_tag :new_author %>
+    <%= text_field_tag :new_author, nil, {:placeholder => "Add New Author"} %>
   </div>
 
   <div class="field">
@@ -24,7 +24,7 @@
     <%#= f.text_field :ps_two_categories_id %>
     <%#= f.collection_select(:ps_two_categories_id, PsTwo::Category.all + [PsTwo::Category.new(id: -1, name: "New Category")], :id, :name, {:selected => '-1'}) %>
     <%= f.collection_select(:ps_two_categories_id, PsTwo::Category.all + [PsTwo::Category.new(id: -1, name: "New Category")], :id, :name) %>
-    <%= text_field_tag :new_category %>
+    <%= text_field_tag :new_category, nil, {:placeholder => "Add New Category"} %>
   </div>
 
   <div class="field">

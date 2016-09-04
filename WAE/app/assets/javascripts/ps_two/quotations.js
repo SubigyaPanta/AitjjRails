@@ -3,6 +3,8 @@ console.log(jQuery);
     $(document).ready(function(){
         var newAuthorBox = $('#new_author');
         var newCategoryBox = $('#new_category');
+        newAuthorBox.hide();
+        newCategoryBox.hide();
 
         $('#ps_two_quotation_ps_two_authors_id').change(function(){
             var value = $(this).val();
