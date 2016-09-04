@@ -5,6 +5,11 @@
   <li><%= link_to("Quotation", ps_two_quotations_path) %></li>
 </ol>
 
+<div id="explanation">
+  <h3>How ActiveRecord uses and SQL Sequence object for ID field?</h3>
+  <p>ActiveRecord creates a new table which is dedicated to keep track of surrogate key of any given table.
+    It records max value, min value, lastest value, etc.</p>
+</div>
 <div id="project-resources">
   Resources used:
   <ul>
