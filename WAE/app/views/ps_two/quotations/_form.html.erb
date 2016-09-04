@@ -12,13 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :ps_two_authors_id %>
-    <%= f.text_field :ps_two_authors_id %>
+    <%= f.label :ps_two_authors_id, "Select Author" %>
+    <%#= f.text_field :ps_two_authors_id %>
+    <%#= f.collection_select(:ps_two_authors_id, PsTwo::Author.all + [PsTwo::Author.new(id: -1, name: "New Author")], :id, :name, {:selected =>'-1'}) %>
+    <%= f.collection_select(:ps_two_authors_id, PsTwo::Author.all + [PsTwo::Author.new(id: -1, name: "New Author")], :id, :name) %>
+    <%= text_field_tag :new_author %>
   </div>
 
   <div class="field">
-    <%= f.label :ps_two_categories_id %>
-    <%= f.text_field :ps_two_categories_id %>
+    <%= f.label :ps_two_categories_id, "Select Category" %>
+    <%#= f.text_field :ps_two_categories_id %>
+    <%#= f.collection_select(:ps_two_categories_id, PsTwo::Category.all + [PsTwo::Category.new(id: -1, name: "New Category")], :id, :name, {:selected => '-1'}) %>
+    <%= f.collection_select(:ps_two_categories_id, PsTwo::Category.all + [PsTwo::Category.new(id: -1, name: "New Category")], :id, :name) %>
+    <%= text_field_tag :new_category %>
   </div>
 
   <div class="field">

@@ -24,6 +24,18 @@ class PsTwo::QuotationsController < ApplicationController
   # POST /ps_two/quotations
   # POST /ps_two/quotations.json
   def create
+
+    #Check if there is a new Author
+    if(params[:ps_two_quotation][:ps_two_authors_id] == "-1")
+      @author = PsTwo::Author.create(name: params[:new_author])
+      params[:ps_two_quotation][:ps_two_authors_id] = @author.id
+    end
+
+    if(params[:ps_two_quotation][:ps_two_categories_id] == "-1")
+      @category = PsTwo::Category.create(name: params[:new_category])
+      params[:ps_two_quotation][:ps_two_categories_id] = @category.id
+    end
+
     @ps_two_quotation = PsTwo::Quotation.new(ps_two_quotation_params)
 
     respond_to do |format|
