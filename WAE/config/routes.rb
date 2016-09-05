@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :ps_two do
     get 'quotations/kill', to: 'quotations#kill'
     get 'quotations/reset', to: 'quotations#reset'
+    get 'quotations/export', to: 'quotations#export'
     resources :quotations
   end
   namespace :ps_one do

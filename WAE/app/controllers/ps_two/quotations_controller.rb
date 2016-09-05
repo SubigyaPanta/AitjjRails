@@ -115,6 +115,40 @@ class PsTwo::QuotationsController < ApplicationController
     return
   end
 
+  def export
+    if !params.has_key?(:type)
+      redirect_to action: 'index'
+      return
+    end
+
+    if params[:type] == 'json'
+      self.export_json
+    elsif params[:type] == 'xml'
+      self.export_xml
+    else
+      redirect_to action: 'index'
+      #log that invalid export type was entered
+    end
+  end
+
+  def export_json
+    quotations = PsTwo::Quotation.all.as_json(include: {:ps_two_authors => {only:[:name]},
+                                                      :ps_two_categories => {only:[:name]}},
+                                              except: [:ps_two_authors_id, :ps_two_categories_id]
+                                              )
+    render json: quotations
+  end
+
+  def export_xml
+    quotations = PsTwo::Quotation.all.as_json(include: {:ps_two_authors => {only:[:name]},
+                                                       :ps_two_categories => {only:[:name]}},
+                                             except: [:ps_two_authors_id, :ps_two_categories_id])
+    render xml: quotations
+    # respond_to do |format|
+    #   format.xml {render xml: quotations}
+    # end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ps_two_quotation

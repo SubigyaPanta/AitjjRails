@@ -36,3 +36,5 @@
 
 <%= link_to 'New Quotation', new_ps_two_quotation_path %>
 <%= link_to 'Clear Personalization', ps_two_quotations_reset_path %>
+<%= link_to 'Export Json', controller: 'ps_two/quotations', action: 'export', type: "json" %>
+<%= link_to 'Export Xml', controller: 'ps_two/quotations', action: 'export', type: "xml" %>
