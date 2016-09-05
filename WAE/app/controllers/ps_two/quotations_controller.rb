@@ -4,14 +4,31 @@ class PsTwo::QuotationsController < ApplicationController
   # GET /ps_two/quotations
   # GET /ps_two/quotations.json
   def index
-    if(params[:search] == nil)
-      @ps_two_quotations = PsTwo::Quotation.all
+    if(!params[:search].present?)
+      @ps_two_quotations = PsTwo::Quotation.where.not(id: JSON.parse(self.get_ids_from_cookie))
     else
       searchString = params[:search]
       @ps_two_quotations = PsTwo::Quotation.where(["quote ILIKE ?", '%'+searchString+'%'])
+                                            .where.not(id: JSON.parse(self.get_ids_from_cookie))
     end
 
   end
+
+  def kill
+    if(!params[:id].present?)
+      redirect_to action: 'index'
+      return
+    end
+
+    respond_to do |format|
+      @ps_two_quotations = PsTwo::Quotation.where.not(id: JSON.parse(self.get_ids_from_cookie))
+
+      format.html { render :index }
+    end
+
+  end
+
+
 
   # GET /ps_two/quotations/1
   # GET /ps_two/quotations/1.json
@@ -83,6 +100,21 @@ class PsTwo::QuotationsController < ApplicationController
     end
   end
 
+  def get_ids_from_cookie
+    if !cookies.has_key?(:ids)
+      cookies[:ids] = JSON.generate([params[:id]])
+    else
+      cookies[:ids] = JSON.generate(JSON.parse(cookies[:ids]) << params[:id])
+    end
+    return cookies[:ids]
+  end
+
+  def reset
+    cookies.delete :ids
+    redirect_to action: 'index'
+    return
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ps_two_quotation
@@ -93,4 +125,5 @@ class PsTwo::QuotationsController < ApplicationController
     def ps_two_quotation_params
       params.require(:ps_two_quotation).permit(:ps_two_authors_id, :ps_two_categories_id, :quote)
     end
+
 end

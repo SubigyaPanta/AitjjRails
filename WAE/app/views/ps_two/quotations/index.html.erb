@@ -26,6 +26,7 @@
         <td><%= link_to 'Show', ps_two_quotation %></td>
         <td><%= link_to 'Edit', edit_ps_two_quotation_path(ps_two_quotation) %></td>
         <td><%= link_to 'Destroy', ps_two_quotation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Kill', controller: 'ps_two/quotations', action: 'kill', id: ps_two_quotation.id %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,3 +35,4 @@
 <br>
 
 <%= link_to 'New Quotation', new_ps_two_quotation_path %>
+<%= link_to 'Clear Personalization', ps_two_quotations_reset_path %>
