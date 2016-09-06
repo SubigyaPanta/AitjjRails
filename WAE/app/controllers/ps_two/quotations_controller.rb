@@ -149,6 +149,46 @@ class PsTwo::QuotationsController < ApplicationController
     # end
   end
 
+  def import
+    if( !params[:location].present? )
+      flash[:error] = "Import failed."
+      redirect_to action: 'index'
+      return
+    end
+
+    xml_doc = Nokogiri::XML(open(params[:location]))
+    quotes = xml_doc.css('quotations')
+    # a=1
+    # puts xml_doc.inspect
+    # puts quotes.inspect
+
+    quotes.children.each do |q|
+      puts author = q.css('author_name').text
+      puts category = q.css('category').text
+      puts quote = q.css('quote').text
+      puts q.children.inspect
+
+      if !author.empty? && !category.empty? && !quote.empty?
+        self.save_imported_records(author, category, quote)
+      end
+    end
+
+    flash[:notice] = "Successfully Imported."
+    redirect_to action: 'index'
+  end
+
+  def save_imported_records(author, category, quote)
+    begin
+    quotation = PsTwo::Quotation.new(quote: quote)
+    quotation.ps_two_authors = PsTwo::Author.new(name: author)
+    quotation.ps_two_categories = PsTwo::Category.find_or_initialize_by(name: category)
+
+    quotation.save
+    rescue ActiveRecord::RecordNotUnique => ex
+      puts ex.message
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_ps_two_quotation

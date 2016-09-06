@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     get 'quotations/kill', to: 'quotations#kill'
     get 'quotations/reset', to: 'quotations#reset'
     get 'quotations/export', to: 'quotations#export'
+    post 'quotations/import', to: 'quotations#import'
     resources :quotations
   end
   namespace :ps_one do
