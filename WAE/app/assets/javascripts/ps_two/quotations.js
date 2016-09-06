@@ -1,6 +1,6 @@
 console.log(jQuery);
 (function($){
-    $(document).ready(function(){
+    $(document).on('ready turbolinks:load', function(){
         var newAuthorBox = $('#new_author');
         var newCategoryBox = $('#new_category');
         newAuthorBox.hide();
