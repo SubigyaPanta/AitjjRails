@@ -255,6 +255,47 @@ wae_development-# GROUP BY my_stocks.symbol;
 
 
 
+wae_development=# SELECT my_stocks.symbol, sum(n_shares), sum(n_shares*stock_prices.price)
+FROM my_stocks
+JOIN stock_prices ON my_stocks.symbol = stock_prices.symbol
+GROUP BY my_stocks.symbol
+HAVING count(my_stocks.symbol) > 1;
+ symbol |  sum  |   sum
+--------+-------+----------
+ icici  | 27000 | 13851000
+ reddys | 45000 | 29295000
+(2 rows)
+
+13.
+
+wae_development=# CReate view stocks_i_like as SELECT my_stocks.symbol, sum(n_shares), sum(n_shares*stock_prices.price) as my_value
+FROM my_stocks
+JOIN stock_prices ON my_stocks.symbol = stock_prices.symbol
+GROUP BY my_stocks.symbol
+HAVING count(my_stocks.symbol) > 1 ;
+ERROR:  relation "stocks_i_like" already exists
+wae_development=# drop view stocks_i_like;
+DROP VIEW
+wae_development=# CReate view stocks_i_like as SELECT my_stocks.symbol, sum(n_shares), sum(n_shares*stock_prices.price) as my_value
+FROM my_stocks
+JOIN stock_prices ON my_stocks.symbol = stock_prices.symbol
+GROUP BY my_stocks.symbol
+HAVING count(my_stocks.symbol) > 1 ;
+CREATE VIEW
+wae_development=# select stocks_i_like;
+ERROR:  column "stocks_i_like" does not exist
+LINE 1: select stocks_i_like;
+               ^
+wae_development=# select * from stocks_i_like;
+ symbol |  sum  | my_value
+--------+-------+----------
+ icici  | 27000 | 13851000
+ reddys | 45000 | 29295000
+(2 rows)
+
+
+
+
 
 
 </pre>
