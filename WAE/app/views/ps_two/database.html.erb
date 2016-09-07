@@ -112,7 +112,6 @@ bsnl   |             1002 |                 |
 (6 rows)
 
 
-11.
 wae_development=# \df+ portfolio_value
 List of functions
 Schema |      Name       | Result data type |   Argument data types    |  Type  | Security | Volatility |  Owner   | Language |           Source code           | Description
@@ -148,8 +147,113 @@ hdfc   | 2016-09-07 |   405
 reddys | 2016-09-07 |   651
 (5 rows)
 
+Second FUNCTION:
 
-12.
+CREATE OR REPLACE FUNCTION second_portfolio_value() RETURNS integer AS $$
+	DECLARE
+		c1 CURSOR FOR SELECT my_stocks.symbol as "Symbol", my_stocks.n_shares as shares, stock_prices.price as price, stock_prices.price*n_shares as "Current Value"
+				FROM stock_prices
+				JOIN my_stocks ON my_stocks.symbol = stock_prices.symbol;
+		val integer := 0;
+
+	BEGIN
+		FOR pointer in c1
+		LOOP
+			val := val + pointer.shares*pointer.price;
+		END LOOP;
+		return val;
+	END;
+$$ LANGUAGE plpgsql;
+
+wae_development=# \df+ second_portfolio_value
+                                                                                                                                              List of functions
+ Schema |          Name          | Result data type | Argument data types |  Type  | Security | Volatility |  Owner   | Language |                                                                          Source code                                                                          | Description
+--------+------------------------+------------------+---------------------+--------+----------+------------+----------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------
+ public | second_portfolio_value | integer          |                     | normal | invoker  | volatile   | postgres | plpgsql  |                                                                                                                                                              +|
+        |                        |                  |                     |        |          |            |          |          | DECLARE                                                                                                                                                      +|
+        |                        |                  |                     |        |          |            |          |          | c1 CURSOR FOR SELECT my_stocks.symbol as "Symbol", my_stocks.n_shares as shares, stock_prices.price as price, stock_prices.price*n_shares as "Current Value" +|
+        |                        |                  |                     |        |          |            |          |          | FROM stock_prices                                                                                                                                            +|
+        |                        |                  |                     |        |          |            |          |          | JOIN my_stocks ON my_stocks.symbol = stock_prices.symbol;                                                                                                    +|
+        |                        |                  |                     |        |          |            |          |          | val integer := 0;                                                                                                                                            +|
+        |                        |                  |                     |        |          |            |          |          |                                                                                                                                                              +|
+        |                        |                  |                     |        |          |            |          |          | BEGIN                                                                                                                                                        +|
+        |                        |                  |                     |        |          |            |          |          | FOR pointer in c1                                                                                                                                            +|
+        |                        |                  |                     |        |          |            |          |          | LOOP                                                                                                                                                         +|
+        |                        |                  |                     |        |          |            |          |          | val := val + pointer.shares*pointer.price;                                                                                                                   +|
+        |                        |                  |                     |        |          |            |          |          | END LOOP;                                                                                                                                                    +|
+        |                        |                  |                     |        |          |            |          |          | return val;                                                                                                                                                  +|
+        |                        |                  |                     |        |          |            |          |          | END;                                                                                                                                                         +|
+        |                        |                  |                     |        |          |            |          |          |                                                                                                                                                               |
+
+wae_development=# select second_portfolio_value();
+ second_portfolio_value
+------------------------
+                7636000
+(1 row)
+
+
+
+wae_development=#
+wae_development=# INSERT INTO my_stocks ( symbol, n_shares, date_acquired)
+rent_date as date_acquiredy_stocks.symbol as symbol, n_shares*2 as n_shares, cur
+wae_development-# FROM my_stocks
+wae_development-# JOIN stock_prices ON my_stocks.symbol=stock_prices.symbol
+m stock_prices);# where stock_prices.price > (SELECT avg(stock_prices.price) fro
+INSERT 0 2
+wae_development=# INSERT INTO my_stocks ( symbol, n_shares, date_acquired)
+acquiredy_stocks.symbol as symbol, n_shares*2 as n_shares, current_date as date_a
+FROM my_stocks
+JOIN stock_prices ON my_stocks.symbol=stock_prices.symbol
+where stock_prices.price > (SELECT avg(stock_prices.price) from stock_prices);
+INSERT 0 4
+wae_development=# select * from my_stocks
+wae_development-# ;
+ symbol | n_shares | date_acquired
+--------+----------+---------------
+ pvv    |     1000 | 2002-09-01
+ axis   |     2000 | 2002-08-02
+ icici  |     3000 | 2002-07-01
+ hdfc   |     4000 | 2003-08-05
+ reddys |     5000 | 2005-05-02
+ appl   |     1500 | 2016-05-05
+ icici  |     6000 | 2016-09-08
+ reddys |    10000 | 2016-09-08
+ icici  |     6000 | 2016-09-08
+ reddys |    10000 | 2016-09-08
+ icici  |    12000 | 2016-09-08
+ reddys |    20000 | 2016-09-08
+(12 rows)
+
+
+wae_development=# SELECT my_stocks.symbol, sum(n_shares)
+wae_development-# FROM my_stocks
+wae_development-# GROUP BY my_stocks.symbol;
+ symbol |  sum
+--------+-------
+ appl   |  1500
+ pvv    |  1000
+ hdfc   |  4000
+ axis   |  2000
+ icici  | 27000
+ reddys | 45000
+(6 rows)
+
+
+wae_development=#
+wae_development=# SELECT my_stocks.symbol, sum(stock_prices.price)
+wae_development-# FROM my_stocks
+wae_development-# JOIN stock_prices ON my_stocks.symbol = stock_prices.symbol
+wae_development-# GROUP BY my_stocks.symbol;
+ symbol | sum
+--------+------
+ pvv    |  348
+ hdfc   |  405
+ axis   |  437
+ icici  | 2052
+ reddys | 2604
+(5 rows)
+
+
 
 
 
