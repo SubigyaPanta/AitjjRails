@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
 
+  namespace :ps_three do
+    get 'planning/docs'
+  end
+
+  namespace :ps_three do
+    get 'planning/akhil'
+  end
+
+  namespace :ps_three do
+    get 'planning/sainath'
+  end
+
+  namespace :ps_three do
+    get 'planning/rajesh'
+  end
+
   namespace :ps_two do
     get 'quotations/kill', to: 'quotations#kill'
     get 'quotations/reset', to: 'quotations#reset'
