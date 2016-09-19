@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   namespace :ps_two do
     get 'quotations/kill', to: 'quotations#kill'
     get 'quotations/reset', to: 'quotations#reset'
@@ -16,6 +17,8 @@ Rails.application.routes.draw do
   get 'ps_one' => 'ps_one#index'
   get 'ps_two' => 'ps_two#index'
   get 'ps_two/database', to: 'ps_two#database'
+
+  get 'ps_three' => 'ps_three#index'
 
   #get 'home/index'
   #get 'login' => 'sessions#new', as: 'log_in'
