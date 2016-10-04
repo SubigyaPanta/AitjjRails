@@ -1,17 +1,19 @@
 # config valid only for current version of Capistrano
 lock '3.6.1'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'WAE'
+set :repo_url, 'git@vgl-ait.org:web16-05.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+set :deploy_to, '/homw/deployer/WAE'
 
 # Default value for :scm is :git
-# set :scm, :git
+set :scm, :git
+set :branch, 'master'
+set :repo_tree, 'WAE'
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -25,6 +27,9 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 
 # Default value for :linked_files is []
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+#set :linked_files, %w{config/database.yml config/secrets.yml}
+set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for linked_dirs is []
 # append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
@@ -34,3 +39,16 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+
+# For restarting apache
+set :passenger_restart_with_touch, true
+
+#Default branch is :master
+# ask :branch, git rev-parse --abbrev-ref HEAD'.chomp
+set :stages, ['production']
+set :default_stage, 'production'
+set :user, 'deployer'
+
+# set ruby version
+set :rbenv_type, :user
+set :rbenv_ruby, '2.3.1'
