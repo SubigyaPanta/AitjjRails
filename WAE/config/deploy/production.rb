@@ -33,7 +33,7 @@ set :default_env,{
 #     #password: 'navyblue'
 # }
 
-Custom SSH Options
+#Custom SSH Options
 server 'web5.cs.ait.ac.th',
  user: 'deployer',
  roles: %w{web app db},
