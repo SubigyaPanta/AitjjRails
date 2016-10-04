@@ -1,0 +1,124 @@
+<pre>
+  subigya@subigya-VirtualBox:~/web16-05/WAE$ cap production deploy
+00:00 git:wrapper
+      01 mkdir -p /tmp
+    ✔ 01 deployer@192.41.170.116 0.026s
+      Uploading /tmp/git-ssh-WAE-production-subigya.sh 100.0%
+      02 chmod 700 /tmp/git-ssh-WAE-production-subigya.sh
+    ✔ 02 deployer@192.41.170.116 0.019s
+00:00 git:check
+      01 git ls-remote --heads git@vgl-ait.org:web16-05.git
+      01 8123bd2851b40a4bdc06921bb249a319c255239e	refs/heads/master
+    ✔ 01 deployer@192.41.170.116 9.616s
+00:09 deploy:check:directories
+      01 mkdir -p /home/deployer/WAE/shared /home/deployer/WAE/releases
+    ✔ 01 deployer@192.41.170.116 0.023s
+00:09 deploy:check:linked_dirs
+      01 mkdir -p /home/deployer/WAE/shared/bin /home/deployer/WAE/shared/log /home/deployer/WAE/shared/tmp/pids /home/deployer/WAE/shared/tmp/cache /home/deployer/WAE/shared/tmp/sockets /home/deployer/W…
+    ✔ 01 deployer@192.41.170.116 0.060s
+00:09 deploy:check:make_linked_dirs
+      01 mkdir -p /home/deployer/WAE/shared/config
+    ✔ 01 deployer@192.41.170.116 0.019s
+00:09 git:clone
+      The repository mirror is at /home/deployer/WAE/repo
+00:09 git:update
+      01 git remote update --prune
+      01 Fetching origin
+    ✔ 01 deployer@192.41.170.116 4.492s
+00:14 git:create_release
+      01 mkdir -p /home/deployer/WAE/releases/20161004143847
+    ✔ 01 deployer@192.41.170.116 0.020s
+      02 git archive master WAE | tar -x --strip-components 1 -f - -C /home/deployer/WAE/releases/20161004143847
+    ✔ 02 deployer@192.41.170.116 0.042s
+00:14 git:set_current_revision
+      01 echo "8123bd2851b40a4bdc06921bb249a319c255239e" >> REVISION
+    ✔ 01 deployer@192.41.170.116 0.019s
+00:14 deploy:symlink:linked_files
+      01 mkdir -p /home/deployer/WAE/releases/20161004143847/config
+    ✔ 01 deployer@192.41.170.116 0.020s
+      02 ln -s /home/deployer/WAE/shared/config/database.yml /home/deployer/WAE/releases/20161004143847/config/database.yml
+    ✔ 02 deployer@192.41.170.116 0.021s
+      03 rm /home/deployer/WAE/releases/20161004143847/config/secrets.yml
+    ✔ 03 deployer@192.41.170.116 0.014s
+      04 ln -s /home/deployer/WAE/shared/config/secrets.yml /home/deployer/WAE/releases/20161004143847/config/secrets.yml
+    ✔ 04 deployer@192.41.170.116 0.019s
+00:14 deploy:symlink:linked_dirs
+      01 mkdir -p /home/deployer/WAE/releases/20161004143847 /home/deployer/WAE/releases/20161004143847/tmp /home/deployer/WAE/releases/20161004143847/vendor /home/deployer/WAE/releases/20161004143847/pu…
+    ✔ 01 deployer@192.41.170.116 0.015s
+      02 rm -rf /home/deployer/WAE/releases/20161004143847/bin
+    ✔ 02 deployer@192.41.170.116 0.015s
+      03 ln -s /home/deployer/WAE/shared/bin /home/deployer/WAE/releases/20161004143847/bin
+    ✔ 03 deployer@192.41.170.116 0.013s
+      04 rm -rf /home/deployer/WAE/releases/20161004143847/log
+    ✔ 04 deployer@192.41.170.116 0.013s
+      05 ln -s /home/deployer/WAE/shared/log /home/deployer/WAE/releases/20161004143847/log
+    ✔ 05 deployer@192.41.170.116 0.019s
+      06 ln -s /home/deployer/WAE/shared/tmp/pids /home/deployer/WAE/releases/20161004143847/tmp/pids
+    ✔ 06 deployer@192.41.170.116 0.020s
+      07 ln -s /home/deployer/WAE/shared/tmp/cache /home/deployer/WAE/releases/20161004143847/tmp/cache
+    ✔ 07 deployer@192.41.170.116 0.013s
+      08 ln -s /home/deployer/WAE/shared/tmp/sockets /home/deployer/WAE/releases/20161004143847/tmp/sockets
+    ✔ 08 deployer@192.41.170.116 0.014s
+      09 ln -s /home/deployer/WAE/shared/vendor/bundle /home/deployer/WAE/releases/20161004143847/vendor/bundle
+    ✔ 09 deployer@192.41.170.116 0.013s
+      10 ln -s /home/deployer/WAE/shared/public/system /home/deployer/WAE/releases/20161004143847/public/system
+    ✔ 10 deployer@192.41.170.116 0.013s
+      11 ln -s /home/deployer/WAE/shared/public/assets /home/deployer/WAE/releases/20161004143847/public/assets
+    ✔ 11 deployer@192.41.170.116 0.019s
+00:15 bundler:install
+      01 $HOME/.rbenv/bin/rbenv exec bundle install --path /home/deployer/WAE/shared/bundle --without development test --deployment --quiet
+    ✔ 01 deployer@192.41.170.116 9.110s
+00:24 deploy:assets:precompile
+      01 $HOME/.rbenv/bin/rbenv exec bundle exec rake assets:precompile
+    ✔ 01 deployer@192.41.170.116 4.054s
+00:29 deploy:assets:backup_manifest
+      01 mkdir -p /home/deployer/WAE/releases/20161004143847/assets_manifest_backup
+    ✔ 01 deployer@192.41.170.116 0.023s
+      02 cp /home/deployer/WAE/releases/20161004143847/public/assets/.sprockets-manifest-b983855de6d187bff9e42c02e78f9453.json /home/deployer/WAE/releases/20161004143847/assets_manifest_backup
+    ✔ 02 deployer@192.41.170.116 0.067s
+00:29 deploy:migrate
+      [deploy:migrate] Run `rake db:migrate`
+00:29 deploy:migrating
+      01 $HOME/.rbenv/bin/rbenv exec bundle exec rake db:migrate
+      01 == 20160903092010 CreatePsTwoCategories: migrating ============================
+      01 -- create_table(:ps_two_categories)
+      01    -> 0.1336s
+      01 == 20160903092010 CreatePsTwoCategories: migrated (0.1338s) ===================
+      01
+      01 == 20160903092027 CreatePsTwoAuthors: migrating ===============================
+      01 -- create_table(:ps_two_authors)
+      01    -> 0.0994s
+      01 == 20160903092027 CreatePsTwoAuthors: migrated (0.0996s) ======================
+      01
+      01 == 20160903094726 CreatePsTwoQuotations: migrating ============================
+      01 -- create_table(:ps_two_quotations)
+      01    -> 0.2051s
+      01 == 20160903094726 CreatePsTwoQuotations: migrated (0.2053s) ===================
+      01
+      01 == 20160904095649 AddIndexToCategoryName: migrating ===========================
+      01 -- add_index(:ps_two_categories, :name, {:unique=>true})
+      01    -> 0.0392s
+      01 == 20160904095649 AddIndexToCategoryName: migrated (0.0394s) ==================
+      01
+    ✔ 01 deployer@192.41.170.116 4.215s
+00:33 deploy:symlink:release
+      01 ln -s /home/deployer/WAE/releases/20161004143847 /home/deployer/WAE/releases/current
+    ✔ 01 deployer@192.41.170.116 0.017s
+      02 mv /home/deployer/WAE/releases/current /home/deployer/WAE
+    ✔ 02 deployer@192.41.170.116 0.017s
+00:33 passenger:restart
+      01 mkdir -p /home/deployer/WAE/releases/20161004143847/tmp
+    ✔ 01 deployer@192.41.170.116 0.015s
+      02 touch /home/deployer/WAE/releases/20161004143847/tmp/restart.txt
+    ✔ 02 deployer@192.41.170.116 0.023s
+00:33 deploy:cleanup
+      Keeping 5 of 6 deployed releases on 192.41.170.116
+      01 rm -rf /home/deployer/WAE/releases/20161004123943
+    ✔ 01 deployer@192.41.170.116 0.109s
+00:33 deploy:log_revision
+      01 echo "Branch master (at 8123bd2851b40a4bdc06921bb249a319c255239e) deployed as release 20161004143847 by subigya" >> /home/deployer/WAE/revisions.log
+    ✔ 01 deployer@192.41.170.116 0.019s
+
+
+
+</pre>

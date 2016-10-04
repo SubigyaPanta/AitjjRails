@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   get 'ps_two/database', to: 'ps_two#database'
 
   get 'ps_three' => 'ps_three#index'
+  get 'ps_three/capistrano-log', to: 'ps_three#capistrano_log'
 
   #get 'home/index'
   #get 'login' => 'sessions#new', as: 'log_in'
