@@ -26,21 +26,21 @@ set :default_env,{
 
 # Global options
 # --------------
-# set :ssh_options, {
-#     keys: %w(/home/subigya/.ssh/AIT_KEYS),
-#     forward_agent: true,
-#     auth_methods: %w(publickey password),
-#     #password: 'navyblue'
-# }
-
-#Custom SSH Options
-server 'web5.cs.ait.ac.th',
- user: 'deployer',
- roles: %w{web app db},
- ssh_options: {
-   user: 'deployer',
-   keys: %w(/home/subigya/.ssh/AIT_KEYS),
-   forward_agent: true,
-   auth_methods: %w(publickey password)
-   #password: 'navyblue'
+set :ssh_options, {
+    keys: %w(/home/subigya/.ssh/AIT_KEYS),
+    forward_agent: true,
+    auth_methods: %w(publickey password)
+    #password: 'navyblue'
 }
+
+# #Custom SSH Options
+# server 'web5.cs.ait.ac.th',
+#  user: 'deployer',
+#  roles: %w{web app db},
+#  ssh_options: {
+#    user: 'deployer',
+#    keys: %w(/home/subigya/.ssh/AIT_KEYS),
+#    forward_agent: true,
+#    auth_methods: %w(publickey password)
+#    #password: 'navyblue'
+# }
