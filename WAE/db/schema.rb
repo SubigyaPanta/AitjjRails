@@ -15,18 +15,6 @@ ActiveRecord::Schema.define(version: 20161010170334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "my_stocks", id: false, force: :cascade do |t|
-    t.string  "symbol",        limit: 20, null: false
-    t.integer "n_shares",                 null: false
-    t.date    "date_acquired",            null: false
-  end
-
-  create_table "newly_acquired_stocks", id: false, force: :cascade do |t|
-    t.string  "symbol",        limit: 20, null: false
-    t.integer "n_shares",                 null: false
-    t.date    "date_acquired",            null: false
-  end
-
   create_table "ps_two_authors", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -48,12 +36,6 @@ ActiveRecord::Schema.define(version: 20161010170334) do
     t.datetime "updated_at",           null: false
     t.index ["ps_two_authors_id"], name: "index_ps_two_quotations_on_ps_two_authors_id", using: :btree
     t.index ["ps_two_categories_id"], name: "index_ps_two_quotations_on_ps_two_categories_id", using: :btree
-  end
-
-  create_table "stock_prices", id: false, force: :cascade do |t|
-    t.string  "symbol",     limit: 20
-    t.date    "quote_date"
-    t.integer "price"
   end
 
   create_table "users", force: :cascade do |t|
