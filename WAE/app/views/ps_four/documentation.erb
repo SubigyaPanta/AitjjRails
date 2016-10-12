@@ -1,16 +1,19 @@
 <h3>User and Contents</h3>
-In my application, users will be AIT students and faculty members. Contents are the items they want to buy and/or sell.
+<p>In my application, users will be AIT students and faculty members. Contents are the items they want to buy and/or sell.
 For eg. New students might want to buy second hand bicycle or notes which are of no use for students about to graduate from AIT.
-
+</p>
 <h3>Avoiding SQL injection and XSS attacks</h3>
-To avoid sql injection, sql query should not be build dynamically using only strings and string concatenation. Instead, we should use prepared statements in which, the query statement is first sent to the database and compiled. Then later, values are sent on the placeholders. This way any input string is unable to mess with the sql query.
+<p>To avoid sql injection, sql query should not be build dynamically using only strings and string concatenation. Instead, we should use prepared statements in which, the query statement is first sent to the database and compiled. Then later, values are sent on the placeholders. This way any input string is unable to mess with the sql query.
 In rails, by following standard practices of active record, our application should be secure against sql injection.
-
-To avoid xss attacks, all data presented to the user should be properly escaped.
+</p>
+<p>To avoid xss attacks, all data presented to the user should be properly escaped.</p>
 
 <h3>Securing database passwords</h3>
-To secure database passwords, the file containing credentials is kept out of version control and some values in the file are read from the environment.
-
+<p>To secure database passwords, the file containing credentials is kept out of version control and some values in the file are read from the environment.
+</p>
 <h3>User data model</h3>
-The user model should store at least name, email address, student id, preferences (privacy control), role (access control).
-For role there might be a separate table along with a join table to map different users to different roles.
+<p>The user model should store at least name, email address, student id, preferences (privacy control), role (access control).
+For role there might be a separate table along with a join table to map different users to different roles.</p>
+
+<h3>Login Flow</h3>
+<%= image_tag("login_flow.png") %>
