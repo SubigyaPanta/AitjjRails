@@ -5,4 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create({email: "subigyapanta@gmail.com", password: "secret123", password_confirmation: "secret123"})
+sa = Role.create({name:"superadmin"})
+Role.create({name:"admin"})
+Role.create({name:"registered"})
+Role.create({name:"blocked"})
+
+user = User.new
+user.email = "subigya@ait.asia"
+user.password = 'secret123'
+user.password_confirmation = 'secret123'
+user.roles << sa
+user.save
