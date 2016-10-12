@@ -34,7 +34,7 @@ class Ability
     if user.role? == 'superadmin'
       can :manage, :all
     elsif user.role? == 'admin'
-      can :manage, :all.in
+      can :manage, :all
     elsif user.role? == 'registered'
       can :read, :all
     elsif user.role? == 'blocked'
