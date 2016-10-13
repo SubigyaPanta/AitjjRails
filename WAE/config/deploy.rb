@@ -54,5 +54,18 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.3.1'
 
 
-
+# Add this in config/deploy.rb
+# and run 'cap production deploy:seed' to seed your database
+namespace :deploy do
+  desc 'Runs rake db:seed'
+  task :seed => [:set_rails_env] do
+    on primary fetch(:migration_role) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "db:seed"
+        end
+      end
+    end
+  end
+end
 
