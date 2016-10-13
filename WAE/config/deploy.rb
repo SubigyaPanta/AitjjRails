@@ -68,7 +68,7 @@ set :rbenv_ruby, '2.3.1'
 #     end
 #   end
 # end
-set :rails_env, fetch(:production)
+set :rails_env, fetch(:default_stage)
 
 namespace :deploy do
   desc 'Runs rake db:seed'
