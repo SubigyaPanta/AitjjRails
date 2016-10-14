@@ -12,7 +12,11 @@ class User < ApplicationRecord
   before_create :set_default_role
 
   def role?
-    self.roles.first.name
+    if !self.roles.nil? && !self.roles.first.nil?
+      return self.roles.first.name
+    else
+      return false
+    end
   end
 
   private
