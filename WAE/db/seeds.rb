@@ -13,5 +13,5 @@ Role.create({name:"blocked"})
 user = User.find_or_initialize_by(email: 'subigya@ait.asia')
 user.password = 'secret123'
 user.password_confirmation = 'secret123'
-user.roles = sa
+user.role = sa
 user.save
