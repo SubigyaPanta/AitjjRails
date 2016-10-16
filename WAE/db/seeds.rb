@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-sa = Role.create({name:"superadmin"})
-Role.create({name:"admin"})
-Role.create({name:"registered"})
-Role.create({name:"blocked"})
+sa = Role.find_or_create_by({name:"superadmin"})
+Role.find_or_create_by({name:"admin"})
+Role.find_or_create_by({name:"registered"})
+Role.find_or_create_by({name:"blocked"})
 
 user = User.find_or_initialize_by(email: 'subigya@ait.asia')
 user.password = 'secret123'
