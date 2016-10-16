@@ -40,6 +40,9 @@ Rails.application.routes.draw do
 
   get 'ps_four' => 'ps_four#index'
   get 'ps_four/documentation', to: 'ps_four#documentation'
+
+  get 'admin', to: 'admin#index'
+
   #get 'home/index'
   #get 'login' => 'sessions#new', as: 'log_in'
 
