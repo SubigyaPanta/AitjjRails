@@ -25,6 +25,8 @@ class User < ApplicationRecord
     # puts 'wha t the fuck'
     # role = Role.find_by_name('registered')
     # puts role.inspect
-    self.role = Role.find_by_name('registered')
+    if self.role.nil?
+      self.role = Role.find_by_name('registered')
+    end
   end
 end
