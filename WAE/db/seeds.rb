@@ -10,8 +10,7 @@ Role.create({name:"admin"})
 Role.create({name:"registered"})
 Role.create({name:"blocked"})
 
-user = User.new
-user.email = "subigya@ait.asia"
+user = User.find_or_initialize_by(email: 'subigya@ait.asia')
 user.password = 'secret123'
 user.password_confirmation = 'secret123'
 user.roles = sa
