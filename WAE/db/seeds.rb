@@ -14,5 +14,5 @@ user = User.new
 user.email = "subigya@ait.asia"
 user.password = 'secret123'
 user.password_confirmation = 'secret123'
-user.roles << sa
+user.roles = sa
 user.save
