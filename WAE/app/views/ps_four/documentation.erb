@@ -17,3 +17,14 @@ For role there might be a separate table along with a join table to map differen
 
 <h3>Login Flow</h3>
 <%= image_tag("login_flow.png") %>
+
+<h3>Authorization Test</h3>
+<div>
+<p>To test authorization follow the following steps</p>
+<ol>
+  <li>Goto Problem set 4 and click login</li>
+  <li>For admin email is admin@ait.asia & password is password123. For registered user email is registered@ait.asia & password is registered123. </li>
+  <li>Goto <%=link_to 'Home Page', root_path %> and try visiting Problem sets as admin, registered user, and without signing in</li>
+  <li>Goto <%=link_to 'Administration', admin_path %> and try visiting as admin, registered user and without signing in. (if you are not admin, you should be redirected to Home page)</li>
+</ol>
+</div>
