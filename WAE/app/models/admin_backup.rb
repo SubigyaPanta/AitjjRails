@@ -1,9 +1,3 @@
-# module Admin
-#   def self.table_name_prefix
-#     'admin_'
-#   end
-# end
-
 class Admin
   include ActiveModel::Model
 
@@ -17,8 +11,8 @@ class Admin
 
   def self.getRecentlyRegistered
     User.joins(:role).where(
-        'users.created_at > :create_at AND roles.name = :rolename', {
-        create_at: 1.month.ago,
-        rolename:   'registered'})
+         'users.created_at > :create_at AND roles.name = :rolename', {
+                create_at: 1.month.ago,
+                rolename:   'registered'})
   end
 end

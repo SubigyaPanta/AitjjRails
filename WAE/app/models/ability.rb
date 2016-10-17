@@ -37,7 +37,7 @@ class Ability
       can :manage, :all
     elsif user.role? == 'registered'
       can :read, :all
-      cannot :read, Admin
+      cannot :read, [Admin, Admin::UserManager]
     elsif user.role? == 'blocked'
       can nil
     else
