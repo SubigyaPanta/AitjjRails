@@ -2,12 +2,12 @@ Given(/^I log in as an admin$/) do
   visit new_user_session_path
 
   @admin = FactoryGirl.create :AdminUser
-  puts @admin.inspect
+  # puts @admin.inspect
   # @adminRole = FactoryGirl.build :AdminRole
   # @admin.role = @adminRole
   fill_in "Email", with: @admin.email
   fill_in 'Password', with: @admin.password
-  save_and_open_page
+  # save_and_open_page
   click_button 'Log in'
   # save_and_open_page
 end
@@ -33,7 +33,7 @@ Given(/^I log in as a registered user$/) do
   visit new_user_session_path
 
   @registered = FactoryGirl.create :RegisteredUser
-  puts @registered.inspect
+  # puts @registered.inspect
   fill_in 'Email', with: @registered.email
   fill_in 'Password', with: @registered.password
   click_button 'Log in'
