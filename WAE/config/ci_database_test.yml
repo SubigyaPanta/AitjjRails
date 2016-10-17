@@ -8,3 +8,7 @@ default: &default
 test: &test
   <<: *default
   database: zwaetra_subtest
+
+development:
+  <<: *default
+  database: wqfucra_dv
