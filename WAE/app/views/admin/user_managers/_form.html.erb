@@ -1,0 +1,31 @@
+<%= form_for(user, url: admin_user_manager_path, method: :put) do |f| %>
+    <% if user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(user.errors.count, "error") %> prohibited this admin_user_manager from being saved:</h2>
+
+          <ul>
+            <% users.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <dl>
+        <dt>Email</dt>
+        <dd><%=user.email %></dd>
+        <dt>AIT ID</dt>
+        <dd><%=user.ait_id %></dd>
+      </dl>
+    </div>
+
+    <div class="field">
+      <%= f.label 'role', 'Role' %>
+      <%= f.collection_select('role', roles, :id, :name) %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

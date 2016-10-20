@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Admin User Managers</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Email</th>
+    <th>AIT ID</th>
+    <th>Role</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.ait_id %></td>
+        <td><%= user.role.name %></td>
+        <td><%= link_to 'Edit', edit_admin_user_manager_path(user) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

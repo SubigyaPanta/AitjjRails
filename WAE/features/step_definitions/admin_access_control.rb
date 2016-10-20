@@ -67,3 +67,24 @@ Given(/^I am a public user$/) do
   expect(page).to have_content('Sign up')
   expect(page).to have_no_content('Log Out')
 end
+
+############## User Manager ###################
+When(/^I visit User Management path$/) do
+  visit admin_user_managers_path
+end
+
+When(/^I change user role to blocked user$/) do
+  # click "Edit"
+  expect(page).to have_content('Edit')
+  us = User.find_by(email: @admin.email)
+  link = '/admin/user_managers/'+us.id.to_s+'/edit'
+  expect(page).to have_link('Edit', href: link)
+  #click_link('Edit', href: link)
+  save_and_open_page
+
+end
+
+Then(/^The role of the user must change from registered to blocked$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+

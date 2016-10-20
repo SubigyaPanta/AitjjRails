@@ -1,0 +1,1 @@
+json.array! @admin_user_managers, partial: 'admin_user_managers/admin_user_manager', as: :admin_user_manager

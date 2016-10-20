@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
 
   namespace :admin do
-    get 'user_manager/index'
+    resources :user_managers
   end
+  namespace :admin do
+    resources :user_managers, only: [:index, :edit, :update]
+  end
+  # namespace :admin do
+  #   get 'user_manager/index'
+  #   get 'user_manager/:id/edit', to: 'user_manager#edit'
+  #   # resources :user_manager
+  # end
 
   devise_for :users
   namespace :ps_three do
