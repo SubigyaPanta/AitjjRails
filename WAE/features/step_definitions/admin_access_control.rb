@@ -79,12 +79,14 @@ When(/^I change user role to blocked user$/) do
   us = User.find_by(email: @admin.email)
   link = '/admin/user_managers/'+us.id.to_s+'/edit'
   expect(page).to have_link('Edit', href: link)
-  #click_link('Edit', href: link)
-  save_and_open_page
-
+  click_link('Edit', href: link)
+  select('blocked', :from => 'user_role')
+  click_button 'Update User'
 end
 
 Then(/^The role of the user must change from registered to blocked$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_current_path(admin_user_managers_path)
+  # This part should be more specific
+  expect(page).to have_content('blocked')
 end
 
