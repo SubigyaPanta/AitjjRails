@@ -1,5 +1,5 @@
 class Admin::UserManagersController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   before_action :set_admin_user_manager, only: [:edit, :update]
 
 
@@ -21,7 +21,7 @@ class Admin::UserManagersController < ApplicationController
 
   # GET /admin/user_managers/1/edit
   def edit
-    @user = Admin::UserManager.getUsers(params[:id])
+    # @user = Admin::UserManager.getUsers(params[:id])
     @roles = Admin::UserManager.getRoles
   end
 
@@ -45,12 +45,13 @@ class Admin::UserManagersController < ApplicationController
   # PATCH/PUT /admin/user_managers/1.json
   def update
     respond_to do |format|
-      if @admin_user_manager.update(admin_user_manager_params)
-        format.html { redirect_to @admin_user_manager, notice: 'User manager was successfully updated.' }
-        format.json { render :show, status: :ok, location: @admin_user_manager }
+      @role = Admin::UserManager.getRoles params[:user][:role]
+      if @user.update( role: @role )
+        format.html { redirect_to admin_user_managers_path, notice: 'User manager was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @admin_user_manager }
       else
         format.html { render :edit }
-        format.json { render json: @admin_user_manager.errors, status: :unprocessable_entity }
+        # format.json { render json: @admin_user_manager.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,7 +69,7 @@ class Admin::UserManagersController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_admin_user_manager
-    # @admin_user_manager = Admin::UserManager.find(params[:id])
+    @user = Admin::UserManager.getUsers(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

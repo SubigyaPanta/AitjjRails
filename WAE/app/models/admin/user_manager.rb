@@ -9,7 +9,11 @@ class Admin::UserManager
     end
   end
 
-  def self.getRoles
-    Role.all
+  def self.getRoles(id = nil)
+    if id.nil?
+      Role.all
+    else
+      Role.find(id)
+    end
   end
 end
