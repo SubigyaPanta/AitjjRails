@@ -16,4 +16,9 @@ class Admin::UserManager
       Role.find(id)
     end
   end
+
+  # THis functoin is added just for compatibility with cancancan as it loads this function and throws
+  # an error if not found.
+  def self.find(arg)
+  end
 end

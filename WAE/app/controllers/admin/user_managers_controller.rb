@@ -1,5 +1,6 @@
 class Admin::UserManagersController < ApplicationController
-  # load_and_authorize_resource
+  # check_authorization
+  load_and_authorize_resource
   before_action :set_admin_user_manager, only: [:edit, :update]
 
 
