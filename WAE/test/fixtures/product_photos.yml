@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: one
+  link: MyString
+  is_primary: false
+  is_deleted: false
+  is_published: false
+
+two:
+  product: two
+  link: MyString
+  is_primary: false
+  is_deleted: false
+  is_published: false

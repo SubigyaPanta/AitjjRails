@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  features: 
+  product_no: MyString
+  is_deleted: false
+  is_published: false
+  color: MyString
+  standard_cost: 9.99
+  selling_price: 9.99
+  weight: 9.99
+  sell_start_date: 2016-10-30
+  sell_end_date: 2016-10-30
+
+two:
+  name: MyString
+  description: MyText
+  features: 
+  product_no: MyString
+  is_deleted: false
+  is_published: false
+  color: MyString
+  standard_cost: 9.99
+  selling_price: 9.99
+  weight: 9.99
+  sell_start_date: 2016-10-30
+  sell_end_date: 2016-10-30
