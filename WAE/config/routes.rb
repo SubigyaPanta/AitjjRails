@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :products
   namespace :admin do
     resources :user_managers
   end
