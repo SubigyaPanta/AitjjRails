@@ -4,8 +4,8 @@ class CreateProductPhotos < ActiveRecord::Migration[5.0]
       t.references :product, foreign_key: true
       t.string :link, limit: 512
       t.boolean :is_primary
-      t.boolean :is_deleted
-      t.boolean :is_published
+      t.boolean :is_deleted, :default => false
+      t.boolean :is_published, :default => true
 
       t.timestamps
     end

@@ -1,4 +1,4 @@
-console.log(jQuery);
+//console.log(jQuery);
 (function($){
     $(document).on('ready turbolinks:load', function(){
         var newAuthorBox = $('#new_author');

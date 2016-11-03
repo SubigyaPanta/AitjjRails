@@ -10,10 +10,72 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016045458) do
+ActiveRecord::Schema.define(version: 20161101170453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "is_published", default: true
+    t.boolean  "is_deleted",   default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true, using: :btree
+  end
+
+  create_table "my_stocks", id: false, force: :cascade do |t|
+    t.string  "symbol",        limit: 20, null: false
+    t.integer "n_shares",                 null: false
+    t.date    "date_acquired",            null: false
+  end
+
+  create_table "newly_acquired_stocks", id: false, force: :cascade do |t|
+    t.string  "symbol",        limit: 20, null: false
+    t.integer "n_shares",                 null: false
+    t.date    "date_acquired",            null: false
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id", using: :btree
+    t.index ["product_id"], name: "index_product_categories_on_product_id", using: :btree
+  end
+
+  create_table "product_photos", force: :cascade do |t|
+    t.integer  "product_id"
+    t.string   "link",         limit: 512
+    t.boolean  "is_primary"
+    t.boolean  "is_deleted",               default: false
+    t.boolean  "is_published",             default: true
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.index ["product_id"], name: "index_product_photos_on_product_id", using: :btree
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.json     "features"
+    t.string   "product_no"
+    t.boolean  "is_deleted"
+    t.boolean  "is_published"
+    t.string   "color"
+    t.decimal  "standard_cost",   precision: 8, scale: 2
+    t.decimal  "selling_price",   precision: 8, scale: 2
+    t.decimal  "weight"
+    t.integer  "user_id"
+    t.integer  "quantity_total"
+    t.integer  "quantity_sold"
+    t.date     "sell_start_date"
+    t.date     "sell_end_date"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["user_id"], name: "index_products_on_user_id", using: :btree
+  end
 
   create_table "ps_two_authors", force: :cascade do |t|
     t.string   "name"
@@ -44,6 +106,12 @@ ActiveRecord::Schema.define(version: 20161016045458) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "stock_prices", id: false, force: :cascade do |t|
+    t.string  "symbol",     limit: 20
+    t.date    "quote_date"
+    t.integer "price"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -70,6 +138,10 @@ ActiveRecord::Schema.define(version: 20161016045458) do
     t.index ["role_id"], name: "index_users_on_role_id", using: :btree
   end
 
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "products"
+  add_foreign_key "product_photos", "products"
+  add_foreign_key "products", "users"
   add_foreign_key "ps_two_quotations", "ps_two_authors", column: "ps_two_authors_id"
   add_foreign_key "ps_two_quotations", "ps_two_categories", column: "ps_two_categories_id"
   add_foreign_key "users", "roles"

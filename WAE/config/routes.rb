@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
 
+  get 'categories/index'
+
+  get 'categories/create'
+
+  get 'categories/show'
+
+  get 'categories/edit'
+
+  get 'categories/update'
+
   resources :products
+  resources :categories
   namespace :admin do
     resources :user_managers
   end
@@ -42,7 +53,9 @@ Rails.application.routes.draw do
     get 'youtube/fetch'
   end
 
-  root 'home#index'
+  root 'products#index'
+
+  get 'assignments' => 'home#index'
 
   get 'ps_one' => 'ps_one#index'
   get 'ps_two' => 'ps_two#index'

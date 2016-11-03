@@ -12,7 +12,9 @@
       <%= link_to 'AIT - Junk To Jade', root_path, {class: 'navbar-brand'}  %>
 
     </div>
-
+    <ul class="nav navbar-nav">
+      <li><%= link_to 'Assignment', assignments_path %></li>
+    </ul>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
@@ -25,7 +27,7 @@
               <ul class="dropdown-menu">
                 <li class="disabled"><%= link_to current_user.email %></li>
                 <li role="separator" class="divider"></li>
-                <li><%= link_to '<span class="glyphicon glyphicon-log-out"></span> Log Out'.html_safe, destroy_user_session_path, method: "delete" %> <span class="glyphicon glyphicon-log-out"></span> </li>
+                <li><%= link_to '<span class="glyphicon glyphicon-log-out"></span> Log Out'.html_safe, destroy_user_session_path, method: "delete" %></li>
               </ul>
           <% else %>
               <%#= link_to "Sign Up", new_user_registration_path%>
