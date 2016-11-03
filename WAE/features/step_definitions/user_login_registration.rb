@@ -12,7 +12,7 @@ end
 
 Then(/^Check that i am registered with ait asia email$/) do
   visit ps_four_path
-  expect(page).to have_content("Logged in as: " + @ait_asia.email)
+  expect(page).to have_content(@ait_asia.email)
 end
 
 Then(/^Logout$/) do
@@ -31,7 +31,7 @@ end
 Then(/^Check that i am registered with ait ac email$/) do
   visit ps_four_path
   # save_and_open_page
-  expect(page).to have_content("Logged in as: " + @ait_ac.email)
+  expect(page).to have_content(@ait_ac.email)
 end
 
 Given(/^I submit my details with other email$/) do
@@ -59,7 +59,7 @@ end
 
 Then(/^Check that i am logged in with ait asia email$/) do
   visit ps_four_path
-  expect(page).to have_content("Logged in as: " + @ait_asia.email)
+  expect(page).to have_content(@ait_asia.email)
 end
 
 Given(/^I submit my ait ac login credentials$/) do
@@ -73,7 +73,7 @@ end
 Then(/^Check that i am logged in with ait ac email$/) do
   visit ps_four_path
   # save_and_open_page
-  expect(page).to have_content("Logged in as: " + @ait_ac.email)
+  expect(page).to have_content(@ait_ac.email)
 end
 
 Given(/^I submit my other email address$/) do
