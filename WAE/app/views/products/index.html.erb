@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Features</th>
+      <th>Product no</th>
+      <th>Is deleted</th>
+      <th>Is published</th>
+      <th>Color</th>
+      <th>Standard cost</th>
+      <th>Selling price</th>
+      <th>Weight</th>
+      <th>User</th>
+      <th>Quantity total</th>
+      <th>Quantity sold</th>
+      <th>Sell start date</th>
+      <th>Sell end date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= product.features %></td>
+        <td><%= product.product_no %></td>
+        <td><%= product.is_deleted %></td>
+        <td><%= product.is_published %></td>
+        <td><%= product.color %></td>
+        <td><%= product.standard_cost %></td>
+        <td><%= product.selling_price %></td>
+        <td><%= product.weight %></td>
+        <td><%= product.user %></td>
+        <td><%= product.quantity_total %></td>
+        <td><%= product.quantity_sold %></td>
+        <td><%= product.sell_start_date %></td>
+        <td><%= product.sell_end_date %></td>
+        <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Product', new_product_path %>
