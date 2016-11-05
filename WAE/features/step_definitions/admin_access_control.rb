@@ -77,7 +77,6 @@ end
 
 When(/^I change user role to blocked user$/) do
   # click "Edit"
-  save_and_open_page
   expect(page).to have_content('Edit')
   # us = User.find_by(email: @admin.email)
   link = '/admin/user_managers/'+@registered.id.to_s+'/edit'

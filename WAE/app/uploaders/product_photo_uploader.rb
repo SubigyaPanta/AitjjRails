@@ -13,7 +13,8 @@ class ProductPhotoUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "images/#{model.class.to_s.underscore}/#{model.product_id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -50,7 +51,7 @@ class ProductPhotoUploader < CarrierWave::Uploader::Base
     if original_filename
       @name ||= Digest::MD5.hexdigest(File.dirname(current_path))
       "#{@name}.#{file.extension}"
-      @name + '-'
+      # @name + '-' + original_filename
     end
   end
 

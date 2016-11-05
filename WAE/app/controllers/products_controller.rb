@@ -40,6 +40,9 @@ class ProductsController < ApplicationController
     # @photo = ProductPhoto.new({link:  params[:product][:photo]})
     # @product.product_photos.new({link: params[:product][:photo]})
     @product.product_photos << @photo
+
+    #assign to current user
+    @product.user = current_user
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
