@@ -70,14 +70,17 @@ end
 
 ############## User Manager ###################
 When(/^I visit User Management path$/) do
+  FactoryGirl.create :BlockedRole
+  @registered = FactoryGirl.create :RegisteredUser
   visit admin_user_managers_path
 end
 
 When(/^I change user role to blocked user$/) do
   # click "Edit"
+  save_and_open_page
   expect(page).to have_content('Edit')
-  us = User.find_by(email: @admin.email)
-  link = '/admin/user_managers/'+us.id.to_s+'/edit'
+  # us = User.find_by(email: @admin.email)
+  link = '/admin/user_managers/'+@registered.id.to_s+'/edit'
   expect(page).to have_link('Edit', href: link)
   click_link('Edit', href: link)
   select('blocked', :from => 'user_role')
