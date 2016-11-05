@@ -52,6 +52,16 @@ FactoryGirl.define do
 
   ########### NEW LEARNED :: TRAITS AND DYNAMIC ASSOCIATION ###########
 
+  # These two user and role is just created so that we can use it with product
+  # We replace thme with @current_user in the code anyway
+  factory :user do
+    sequence(:email){|e| "st#{e}@ait.asia"}
+    password 'password'
+    role
+  end
+  factory :role do
+    name 'admin'
+  end
 
   factory :category do
     name 'Dummy Cat'
@@ -68,8 +78,20 @@ FactoryGirl.define do
     color 'Red'
     weight 2
     selling_price 200
+    # association :user, :factory => :AdminUser
+    user
     # product_photos {FactoryGirl.build :product_photos}
   end
+
+  # trait :with_user do
+  #   ignore do
+  #     user :AdminUser
+  #   end
+  #
+  #   after :create do |product, evaluator|
+  #     FactoryGirl.create :user, evaluator.user, :product => product
+  #   end
+  # end
 
   # This will create fixed i.e 3 product_photos (however we are using only 1 in code)
   # trait :with_product_photos do

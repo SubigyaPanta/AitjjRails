@@ -1,10 +1,6 @@
 Given(/^I visit product page$/) do
   #create 4 products before visiting
-  4.times { product = FactoryGirl.create :product
-      puts product.user.inspect
-      puts @admin.inspect
-    # puts current_user.inspect
-    }
+  4.times { product = FactoryGirl.create :product, user: @current_user }
   visit products_path
 end
 

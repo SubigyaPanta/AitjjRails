@@ -2,6 +2,7 @@ Given(/^I log in as an admin$/) do
   visit new_user_session_path
 
   @admin = FactoryGirl.create :AdminUser
+  @current_user = @admin
   # puts @admin.inspect
   # @adminRole = FactoryGirl.build :AdminRole
   # @admin.role = @adminRole
@@ -33,6 +34,7 @@ Given(/^I log in as a registered user$/) do
   visit new_user_session_path
 
   @registered = FactoryGirl.create :RegisteredUser
+  @current_user = @registered
   # puts @registered.inspect
   fill_in 'Email', with: @registered.email
   fill_in 'Password', with: @registered.password
