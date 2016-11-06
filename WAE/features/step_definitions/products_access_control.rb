@@ -10,7 +10,6 @@ end
 
 Then(/^I should see list of available products$/) do
   # To see list title
-  save_and_open_page
   expect(page).to have_css('.panel-heading')
   # expect(page).to have_
   # For image and other details
