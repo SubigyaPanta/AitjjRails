@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
-  get 'assignments' => 'home#index'
+  get 'assignments' => 'home#assignment'
 
   get 'ps_one' => 'ps_one#index'
   get 'ps_two' => 'ps_two#index'
@@ -66,6 +66,9 @@ Rails.application.routes.draw do
 
   get 'ps_four' => 'ps_four#index'
   get 'ps_four/documentation', to: 'ps_four#documentation'
+
+  get 'ps_five' => 'ps_five#index'
+  get 'ps_five/documentation', to: 'ps_five#documentation'
 
   get 'admin', to: 'admin#index'
 
