@@ -1,11 +1,113 @@
 <h1>PS-5 Docs</h1>
 
 <h3>Types of Contents</h3>
-
+<p>
+  The types of contents possible are:<br>
+  <ul>
+    <li>Product details</li>
+    <li>Product photo/image</li>
+    <li>Product category</li>
+    <li>User details</li>
+    <li>Communication data between users if possible</li>
+  </ul>
+</p>
 
 <h3>Data Model</h3>
+<pre>
+                                          Table "public.products"
+     Column      |            Type             |                       Modifiers
+-----------------+-----------------------------+-------------------------------------------------------
+ id              | integer                     | not null default nextval('products_id_seq'::regclass)
+ name            | character varying           |
+ description     | text                        |
+ features        | json                        |
+ product_no      | character varying           |
+ is_deleted      | boolean                     |
+ is_published    | boolean                     |
+ color           | character varying           |
+ standard_cost   | numeric(8,2)                |
+ selling_price   | numeric(8,2)                |
+ weight          | numeric                     |
+ user_id         | integer                     |
+ quantity_total  | integer                     |
+ quantity_sold   | integer                     |
+ sell_start_date | date                        |
+ sell_end_date   | date                        |
+ created_at      | timestamp without time zone | not null
+ updated_at      | timestamp without time zone | not null
+Indexes:
+    "products_pkey" PRIMARY KEY, btree (id)
+    "index_products_on_user_id" btree (user_id)
+Foreign-key constraints:
+    "fk_rails_dee2631783" FOREIGN KEY (user_id) REFERENCES users(id)
+Referenced by:
+    TABLE "product_photos" CONSTRAINT "fk_rails_8910fe3d0f" FOREIGN KEY (product_id) REFERENCES products(id)
+    TABLE "product_categories" CONSTRAINT "fk_rails_98a9a32a41" FOREIGN KEY (product_id) REFERENCES products(id)
 
+</pre>
+<pre>
+                                        Table "public.product_photos"
+    Column    |            Type             |                          Modifiers
+--------------+-----------------------------+-------------------------------------------------------------
+ id           | integer                     | not null default nextval('product_photos_id_seq'::regclass)
+ product_id   | integer                     |
+ link         | character varying(512)      |
+ is_primary   | boolean                     |
+ is_deleted   | boolean                     | default false
+ is_published | boolean                     | default true
+ created_at   | timestamp without time zone | not null
+ updated_at   | timestamp without time zone | not null
+Indexes:
+    "product_photos_pkey" PRIMARY KEY, btree (id)
+    "index_product_photos_on_product_id" btree (product_id)
+Foreign-key constraints:
+    "fk_rails_8910fe3d0f" FOREIGN KEY (product_id) REFERENCES products(id)
+
+</pre>
+
+<pre>
+                                        Table "public.categories"
+    Column    |            Type             |                        Modifiers
+--------------+-----------------------------+---------------------------------------------------------
+ id           | integer                     | not null default nextval('categories_id_seq'::regclass)
+ name         | character varying           |
+ is_published | boolean                     | default true
+ is_deleted   | boolean                     | default false
+ created_at   | timestamp without time zone | not null
+ updated_at   | timestamp without time zone | not null
+Indexes:
+    "categories_pkey" PRIMARY KEY, btree (id)
+    "index_categories_on_name" UNIQUE, btree (name)
+Referenced by:
+    TABLE "product_categories" CONSTRAINT "fk_rails_005b71ca83" FOREIGN KEY (category_id) REFERENCES categories(id)
+
+</pre>
+
+<pre>
+                                        Table "public.product_categories"
+   Column    |            Type             |                            Modifiers
+-------------+-----------------------------+-----------------------------------------------------------------
+ id          | integer                     | not null default nextval('product_categories_id_seq'::regclass)
+ product_id  | integer                     |
+ category_id | integer                     |
+ created_at  | timestamp without time zone | not null
+ updated_at  | timestamp without time zone | not null
+Indexes:
+    "product_categories_pkey" PRIMARY KEY, btree (id)
+    "index_product_categories_on_category_id" btree (category_id)
+    "index_product_categories_on_product_id" btree (product_id)
+Foreign-key constraints:
+    "fk_rails_005b71ca83" FOREIGN KEY (category_id) REFERENCES categories(id)
+    "fk_rails_98a9a32a41" FOREIGN KEY (product_id) REFERENCES products(id)
+
+
+</pre>
 <h3>Versioning</h3>
+<p>
+  It seems like I don't really need a versioning system. However, ability to change and rollback uploaded pictures and description seems to be a good facility. Regarding the versions,
+  I think having a separate table which is the exact replacate, that is updated with old data with every update is what I thought.
+
+</p>
 
 <h3>User Acceptance Testing</h3>
 <pre>
