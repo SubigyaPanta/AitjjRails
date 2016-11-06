@@ -28,5 +28,7 @@ Feature: Add, View and Edit Product Items.
 
     Given I am a public user
     And I visit product page
-    And I click on the product title or image
+    When I click on the product title
     Then I should go to product detail page
+#    When I click on the product image
+#    Then I should go to product detail page

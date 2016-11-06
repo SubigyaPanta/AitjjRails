@@ -4,7 +4,11 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h4><%= product.name %><small class="pull-right">&#3647; <%= product.selling_price %></small></h4>
+          <h4 class="pull-left"><%= link_to product.name, product %> <small class="price">&#3647; <%= product.selling_price %></small></h4>
+          <% if can? :update, product %>
+            <div class="pull-right"><%= link_to '<span class="glyphicon glyphicon-edit"></span> Edit'.html_safe, edit_product_path(product) %></div>
+          <% end %>
+          <div class="clearfix"></div>
         </div>
         <div class="panel-body">
           <dl class="dl-horizontal">

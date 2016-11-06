@@ -1,6 +1,10 @@
 Given(/^I visit product page$/) do
   #create 4 products before visiting
-  4.times { product = FactoryGirl.create :product, user: @current_user }
+  @prods = Array.new
+  4.times { |n| @prods[n] = FactoryGirl.create :product, user: @current_user }
+  #Create one product so that it belongs to admin so that only admin and no registered
+  # user can edit/update it
+  @prods << FactoryGirl.create( :product, user: @admin)
   visit products_path
 end
 
@@ -16,25 +20,45 @@ Then(/^I should see list of available products$/) do
 end
 
 Then(/^I should not be able to edit any product$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_no_css('.glyphicon-edit')
+  expect(page).to have_no_link('Edit')
 end
 
 Then(/^I should be able edit only my product$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  for product in @prods
+    if product.user == @current_user
+      expect(page).to have_css('.glyphicon-edit')
+      expect(page).to have_link('Edit', :href => edit_product_path(product))
+      puts edit_product_path(product)
+    end
+  end
 end
 
 Then(/^I should not be able to edit other's product$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  for product in @prods
+    if product.user != @current_user
+      expect(page).to have_no_link('Edit', :href => edit_product_path(product))
+      puts edit_product_path(product)
+    end
+  end
 end
 
 Then(/^I should be able to edit any product$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  for product in @prods
+    expect(page).to have_link('Edit', :href => edit_product_path(product))
+    puts edit_product_path(product)
+  end
 end
 
-Given(/^I click on the product title or image$/) do
+When(/^I click on the product title$/) do
+    find(:xpath, "//a[@href='"+product_path(@prods[1])+"']").click
+end
+
+When(/^I click on the product image$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^I should go to product detail page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_current_path(product_path(@prods[1]))
+  puts product_path(@prods[1])
 end

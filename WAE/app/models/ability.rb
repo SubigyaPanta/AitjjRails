@@ -36,13 +36,17 @@ class Ability
     elsif user.role? == 'admin'
       can :manage, :all
     elsif user.role? == 'registered'
-      can [:read, :create], Product
+      can :read, Product, :is_deleted => false
+      can :create, Product
+      # can :update, Product, :user_id => user.id
+      can [:edit, :update], Product, :user_id => user.id
+      # puts user.id
       can :read, Category, :is_deleted => false
       cannot :read, [Admin, Admin::UserManager]
     elsif user.role? == 'blocked'
       can :read, Product
     else
-      can :read, Product
+      can :read, Product, :is_deleted => false
       can :read, Category, :is_deleted => false
       cannot :read, [Admin, Admin::UserManager]
     end
