@@ -1,1 +1,119 @@
 <h1>PS-5 Docs</h1>
+
+<h3>Types of Contents</h3>
+
+
+<h3>Data Model</h3>
+
+<h3>Versioning</h3>
+
+<h3>User Acceptance Testing</h3>
+<pre>
+  subigya@subigya-VirtualBox:~$ cd web16-05/WAE/
+subigya@subigya-VirtualBox:~/web16-05/WAE$ clear
+
+subigya@subigya-VirtualBox:~/web16-05/WAE$ bundle exec cucumber
+DEPRECATION WARNING: `#ignore` is deprecated and will be removed in 5.0. Please use `#transient` instead. (called from block (2 levels) in <top (required)> at /home/subigya/web16-05/WAE/features/support/factories.rb:105)
+Using the default profile...
+Feature: Only Admins should be able to see administration pages. Admins and SuperAdmins should be able to add user role.
+  Adding / removing user role includes, providing a high permissions/priviliges or block/banning a user
+
+  Scenario: An admin logs in and wants to see administration page # features/AdminAccessControl.feature:4
+    Given I log in as an admin                                    # features/step_definitions/admin_access_control.rb:1
+    And I visit administration path                               # features/step_definitions/admin_access_control.rb:16
+    Then I should see the admin page contents                     # features/step_definitions/admin_access_control.rb:21
+
+  Scenario: A registered user logs in and wants to see administration page # features/AdminAccessControl.feature:11
+    Given I log in as a registered user                                    # features/step_definitions/admin_access_control.rb:33
+    And I visit administration path                                        # features/step_definitions/admin_access_control.rb:16
+    Then I should not see the admin page contents                          # features/step_definitions/admin_access_control.rb:49
+    And I should be redirected to home page                                # features/step_definitions/admin_access_control.rb:61
+
+  Scenario: Public user wants to see administration page # features/AdminAccessControl.feature:19
+    Given I am a public user                             # features/step_definitions/admin_access_control.rb:65
+    And I visit administration path                      # features/step_definitions/admin_access_control.rb:16
+    Then I should not see the admin page contents        # features/step_definitions/admin_access_control.rb:49
+    And I should be redirected to home page              # features/step_definitions/admin_access_control.rb:61
+
+  Scenario: Admin logs in and wants to change a user role            # features/AdminAccessControl.feature:27
+    Given I log in as an admin                                       # features/step_definitions/admin_access_control.rb:1
+    When I visit User Management path                                # features/step_definitions/admin_access_control.rb:74
+    And I change user role to blocked user                           # features/step_definitions/admin_access_control.rb:80
+    Then The role of the user must change from registered to blocked # features/step_definitions/admin_access_control.rb:91
+
+Feature: Add, View and Edit Product Items.
+
+  Scenario: Public user visits product page.     # features/ProductPage.feature:4
+    Given I am a public user                     # features/step_definitions/admin_access_control.rb:65
+    And I visit product page                     # features/step_definitions/products_access_control.rb:1
+    Then I should see list of available products # features/step_definitions/products_access_control.rb:11
+    And I should not be able to edit any product # features/step_definitions/products_access_control.rb:21
+
+  Scenario: Registered user visits product page.     # features/ProductPage.feature:11
+    Given I log in as a registered user              # features/step_definitions/admin_access_control.rb:33
+    And I visit product page                         # features/step_definitions/products_access_control.rb:1
+    Then I should see list of available products     # features/step_definitions/products_access_control.rb:11
+    And I should be able edit only my product        # features/step_definitions/products_access_control.rb:26
+      /products/710/edit
+      /products/711/edit
+      /products/712/edit
+      /products/713/edit
+    But I should not be able to edit other's product # features/step_definitions/products_access_control.rb:36
+      /products/714/edit
+
+  Scenario: Admin user visits product page.      # features/ProductPage.feature:19
+    Given I log in as an admin                   # features/step_definitions/admin_access_control.rb:1
+    And I visit product page                     # features/step_definitions/products_access_control.rb:1
+    Then I should see list of available products # features/step_definitions/products_access_control.rb:11
+    And I should be able to edit any product     # features/step_definitions/products_access_control.rb:45
+      /products/715/edit
+      /products/716/edit
+      /products/717/edit
+      /products/718/edit
+      /products/719/edit
+
+  Scenario: A user clicks on the product in product list. # features/ProductPage.feature:27
+    Given I am a public user                              # features/step_definitions/admin_access_control.rb:65
+    And I visit product page                              # features/step_definitions/products_access_control.rb:1
+    When I click on the product title                     # features/step_definitions/products_access_control.rb:52
+    Then I should go to product detail page               # features/step_definitions/products_access_control.rb:60
+      /products/721
+
+Feature: User Registration
+  A new user who wants to login, should be able to register himself on the system.
+
+  Scenario: I want to register myself with Ait email address # features/UserLoginRegister.feature:4
+    Given I visit the user registration page                 # features/step_definitions/user_login_registration.rb:1
+    And I submit my details with ait asia email              # features/step_definitions/user_login_registration.rb:5
+    Then Check that i am registered with ait asia email      # features/step_definitions/user_login_registration.rb:13
+    And Logout                                               # features/step_definitions/user_login_registration.rb:18
+    Given I visit the user registration page                 # features/step_definitions/user_login_registration.rb:1
+    And I submit my details with ait ac email                # features/step_definitions/user_login_registration.rb:23
+    Then Check that i am registered with ait ac email        # features/step_definitions/user_login_registration.rb:31
+    And Logout                                               # features/step_definitions/user_login_registration.rb:18
+
+  Scenario: I want to register myself with other email address # features/UserLoginRegister.feature:17
+    Given I visit the user registration page                   # features/step_definitions/user_login_registration.rb:1
+    And I submit my details with other email                   # features/step_definitions/user_login_registration.rb:37
+    Then I should see "Email is invalid" error                 # features/step_definitions/user_login_registration.rb:45
+
+  Scenario: I want to login using Ait email address    # features/UserLoginRegister.feature:24
+    Given I visit user login page                      # features/step_definitions/user_login_registration.rb:49
+    And I submit my ait asia login credentials         # features/step_definitions/user_login_registration.rb:53
+    Then Check that i am logged in with ait asia email # features/step_definitions/user_login_registration.rb:60
+    And Logout                                         # features/step_definitions/user_login_registration.rb:18
+    Given I visit user login page                      # features/step_definitions/user_login_registration.rb:49
+    And I submit my ait ac login credentials           # features/step_definitions/user_login_registration.rb:65
+    Then Check that i am logged in with ait ac email   # features/step_definitions/user_login_registration.rb:73
+    And Logout                                         # features/step_definitions/user_login_registration.rb:18
+
+  Scenario: I want to login using other email address   # features/UserLoginRegister.feature:37
+    Given I visit user login page                       # features/step_definitions/user_login_registration.rb:49
+    And I submit my other email address                 # features/step_definitions/user_login_registration.rb:79
+    Then I should stay in the same page unable to login # features/step_definitions/user_login_registration.rb:86
+
+12 scenarios (12 passed)
+54 steps (54 passed)
+0m5.463s
+
+</pre>
