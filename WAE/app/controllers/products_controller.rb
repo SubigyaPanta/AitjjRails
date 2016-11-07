@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource :except => :create
+  # load_and_authorize_resource
+
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
@@ -25,6 +27,7 @@ class ProductsController < ApplicationController
 
   # POST /products
   # POST /products.json
+  # Authorization is pending
   def create
     picture = params[:product][:product_photos]
     params[:product].delete :product_photos

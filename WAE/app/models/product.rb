@@ -6,5 +6,5 @@ class Product < ApplicationRecord
   has_many :categories, through: :product_categories
 
   # has_attached_file :photo
-  accepts_nested_attributes_for :product_photos
+  # accepts_nested_attributes_for :product_photos
 end

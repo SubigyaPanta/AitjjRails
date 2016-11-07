@@ -40,6 +40,12 @@ class Ability
       can :create, Product
       # can :update, Product, :user_id => user.id
       can [:edit, :update], Product, :user_id => user.id
+
+      # can [:edit, :update], Product do |p|
+      #   Rails.logger.info p.inspect
+      #   p.user_id == user.id
+      # end
+      Rails.logger.info user.inspect
       # puts user.id
       can :read, Category, :is_deleted => false
       cannot :read, [Admin, Admin::UserManager]
