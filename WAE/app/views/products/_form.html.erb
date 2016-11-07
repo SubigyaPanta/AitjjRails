@@ -1,112 +1,101 @@
 <%= form_for(product, {:multipart => true}) do |f| %>
-  <% if product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <% if product.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
-      <ul>
-      <% product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+              <% product.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
-  <div class="field">
-    <%= f.label :category, "Select Category" %>
-    <%#= f.text_field :ps_two_categories_id %>
-    <%#= f.collection_select(:ps_two_categories_id, PsTwo::Category.all + [PsTwo::Category.new(id: -1, name: "New Category")], :id, :name, {:selected => '-1'}) %>
-    <%#= f.collection_select(:id, Category.all, :id, :name, {:prompt => '--- Select category ---'}, {:multiple => true, :name => 'product[category_ids][]'}) %>
-    <%= f.collection_select(:id, Category.all, :id, :name, {}, {:multiple => true, :name => 'product[category_ids][]'}) %>
-    <%#= text_field_tag :new_product_category, nil, {:placeholder => "Add New Category"} %>
-  </div>
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :is_published, {:checked => 'checked'}, 1, 0 %> Is Published
+        </label>
+      </div>
 
-  <div class="field">
-    <%= f.label :features %>
-    <%= f.text_field :features %>
-  </div>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :product_no %>
-    <%= f.text_field :product_no %>
-  </div>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_area :description, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :is_deleted %>
-    <%= f.check_box :is_deleted %>
-  </div>
+      <div class="form-group">
+        <%= f.label :category, "Select Category" %>
+        <%#= f.text_field :ps_two_categories_id %>
+        <%#= f.collection_select(:ps_two_categories_id, PsTwo::Category.all + [PsTwo::Category.new(id: -1, name: "New Category")], :id, :name, {:selected => '-1'}) %>
+        <%#= f.collection_select(:id, Category.all, :id, :name, {:prompt => '--- Select category ---'}, {:multiple => true, :name => 'product[category_ids][]'}) %>
+        <%= f.collection_select(:id, Category.all, :id, :name, {}, {:multiple => true, :name => 'product[category_ids][]', :class => 'form-control'}) %>
+        <%#= text_field_tag :new_product_category, nil, {:placeholder => "Add New Category"} %>
+      </div>
 
-  <div class="field">
-    <%= f.label :is_published %>
-    <%= f.check_box :is_published %>
-  </div>
+      <div class="form-group">
+        <%= f.label :selling_price %>
+        <%= f.text_field :selling_price, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :color %>
-    <%= f.text_field :color %>
-  </div>
+      <div class="form-group">
+        <%= f.label :photos %>
+        <%= f.file_field :photos, {:name => 'product[product_photos][link]'} %>
+      </div>
 
-  <div class="field">
-    <%= f.label :standard_cost %>
-    <%= f.text_field :standard_cost %>
-  </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group">
+        <%= f.label :standard_cost %>
+        <%= f.text_field :standard_cost, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :selling_price %>
-    <%= f.text_field :selling_price %>
-  </div>
+      <div class="form-group">
+        <%= f.label :weight, 'Weight (in Kg)' %>
+        <%= f.text_field :weight, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :weight %>
-    <%= f.text_field :weight %>
-  </div>
+      <div class="form-group">
+        <%= f.label :color %>
+        <%= f.text_field :color, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
-  </div>
+      <div class="form-group">
+        <%= f.label :quantity_total %>
+        <%= f.number_field :quantity_total, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :quantity_total %>
-    <%= f.number_field :quantity_total %>
-  </div>
+      <div class="form-group">
+        <%= f.label :quantity_sold %>
+        <%= f.number_field :quantity_sold, :class => 'form-control' %>
+      </div>
 
-  <div class="field">
-    <%= f.label :quantity_sold %>
-    <%= f.number_field :quantity_sold %>
-  </div>
-
-  <div class="field">
-    <%= f.label :sell_start_date %>
-    <%= f.date_select :sell_start_date %>
-  </div>
-
-  <div class="field">
-    <%= f.label :sell_end_date %>
-    <%= f.date_select :sell_end_date %>
+      <div class="form-group">
+        <%= f.label :product_no %>
+        <%= f.text_field :product_no, :class => 'form-control' %>
+      </div>
+    </div>
   </div>
 
   <!--<%# fields_for @product_photos do |pp|  #puts pp.inspect %>-->
-    <!--<div class="field">-->
+    <!--<div class="form-group">-->
       <!--<#%= pp.label :link %>-->
       <!--<%#= pp.file_field :link %>-->
     <!--</div>-->
   <!--<%# end %>-->
-    <div class="field">
-      <%= f.label :photos %>
-      <%= f.file_field :photos, {:name => 'product[product_photos][link]'} %>
-    </div>
+
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Submit', :class => 'btn btn-primary' %>
   </div>
 <% end %>
