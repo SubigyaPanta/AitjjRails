@@ -12,6 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= stub scaffolds
+ *= stub bootstrap
+ *= stub darkly
+ *= stub material
+ *= stub yeti
  */
 #project-resources{
     position: absolute;
