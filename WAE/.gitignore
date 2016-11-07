@@ -15,6 +15,7 @@
 config/database.yml
 config/secrets.yml
 coverage
+public/images/product_photo
 
 # Ignore Byebug command history file.
 .byebug_history
