@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <% @products.each do |product| %>
   <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-9 col-sm-12 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="pull-left"><%= link_to product.name, product %> <small class="price">&#3647; <%= product.selling_price %></small></h4>
@@ -11,7 +11,8 @@
           <div class="clearfix"></div>
         </div>
         <div class="panel-body">
-          <dl class="dl-horizontal">
+          <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <dl class="dl-horizontal">
             <% unless product.standard_cost.blank? %>
                 <dt>Standard Cost</dt>
                 <dd><%= product.standard_cost %></dd>
@@ -29,21 +30,29 @@
                 <dd><%= product.weight %></dd>
             <% end %>
             <% unless product.product_no.blank? %>
-              <dt>Product No.</dt>
-              <dd><%= product.product_no %></dd>
+                <dt>Product No.</dt>
+                <dd><%= product.product_no %></dd>
             <% end %>
           </dl>
-          <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
             <% unless product.product_photos.first.blank?  %>
-                <td><%= image_tag product.product_photos.first.link.to_s, {:class => 'img-responsive'} %></td>
+                <div><%= image_tag product.product_photos.first.link.to_s, {:class => 'img-responsive'} %></div>
             <% end %>
           </div>
-          <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
-
+          <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <strong>Description</strong>
+            <p>
+              <%= product.description %>
+            </p>
           </div>
         </div>
 
-        <div class="panel-footer"><%= product.description %></div>
+        <div class="panel-footer">
+          <div class="input-group">
+            <span class="input-group-addon" id="<%= product.id %>"><span class="glyphicon glyphicon-comment"></span></span>
+            <input type="text" class="form-control" placeholder="Add Comment" aria-describedby="<%= product.id %>" <% unless (defined?(user_signed_in)).nil? && user_signed_in?  %>
+                        data-toggle="tooltip" data-placement="top" title="You need to be logged in to comment" <% end %>/>
+          </div>
+        </div>
       </div>
     </div>
   </div>

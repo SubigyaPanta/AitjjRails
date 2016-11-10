@@ -59,5 +59,24 @@ end
 
 Then(/^I should go to product detail page$/) do
   expect(page).to have_current_path(product_path(@prods[1]))
-  puts product_path(@prods[1])
+  # puts product_path(@prods[1])
 end
+
+############ Comment Section ################
+
+When(/^I open comment box on a product$/) do
+  find(:xpath, "//span[@data-comment='"+@prods[1].id+"']")
+end
+
+Then(/^I should not be able to add a comment$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should be redirected to login page with a message$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should be able to add a comment$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
