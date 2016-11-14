@@ -64,9 +64,16 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'simplecov'
+  gem 'poltergeist'
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'simplecov', :require => false #I have to do something about simplecov (let's see about this)
+  gem 'simplecov-rcov', :require => false
+  gem 'ci_reporter'
+  gem 'ci_reporter_minitest'
+  gem 'minitest-stub_any_instance'
+  gem 'minitest-around'
+  gem 'rails-controller-testing'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
