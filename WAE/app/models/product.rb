@@ -7,4 +7,6 @@ class Product < ApplicationRecord
 
   # has_attached_file :photo
   # accepts_nested_attributes_for :product_photos
+  validates :name, presence: true
+  validates :selling_price, presence: true
 end
