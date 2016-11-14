@@ -63,9 +63,21 @@ Then(/^I should go to product detail page$/) do
 end
 
 ############ Comment Section ################
+def make_products
+  @prods = Array.new
+  4.times { |n| @prods[n] = FactoryGirl.create :product, user: @current_user }
+  #Create one product so that it belongs to admin so that only admin and no registered
+  # user can edit/update it
+  @prods << FactoryGirl.create( :product, user: @admin)
+end
 
-When(/^I open comment box on a product$/) do
-  find(:xpath, "//span[@data-comment='"+@prods[1].id+"']")
+When(/^I try to comment on a product/) do
+  make_products
+  # find(:xpath, "//span[@data-comment='"+@prods[1].id+
+  visit products_path
+  fill_in 'product-'+@prods[1].id.to_s, with: 'My comment'
+  find(:css, '#button-'+@prods[1].id.to_s).click
+  save_and_open_page
 end
 
 Then(/^I should not be able to add a comment$/) do
