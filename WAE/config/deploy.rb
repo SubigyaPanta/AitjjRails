@@ -67,7 +67,15 @@ namespace :deploy do
       end
     end
   end
+
+  desc "Symlink shared configs and folders on each release."
+  task :symlink_shared do
+    run "ln -nfs #{shared_path}/public/images/product_photo #{release_path}/public/images/product_photo"
+  end
 end
+
+after 'deploy:update_code', 'deploy:symlink_shared'
+
 # set :rails_env, fetch(:default_stage)
 #
 # namespace :deploy do
