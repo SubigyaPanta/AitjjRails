@@ -14,11 +14,7 @@ class ProductPhotoUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     # "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    # if Rails.env.production?
-    #   "../../shared/public/images/#{model.class.to_s.underscore}/#{model.product_id}"
-    # else
-      "images/#{model.class.to_s.underscore}/#{model.product_id}"
-    # end
+    "images/#{model.class.to_s.underscore}/#{model.product_id}"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
