@@ -52,7 +52,10 @@
           <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
           <input type="text" id="<%= 'product-'+@product.id.to_s %>" class="form-control" placeholder="Add Comment" aria-describedby="<%= @product.id %>" <% unless (defined?(user_signed_in)).nil? && user_signed_in?  %>
                  data-toggle="tooltip" data-placement="top" title="You need to be logged in to comment" <% end %>/>
-          <span id="button-<%= @product.id.to_s %>" class="input-group-addon comment" data-product="<%= @product.id %>"><span>Comment</span></span>
+          <span id="button-<%= @product.id.to_s %>" class="input-group-addon comment" data-product="<%= @product.id %>"
+                data-link="<%= product_path(@product) %>">
+            <span>Comment</span>
+          </span>
         </div>
         <!--<button class="btn btn-default">Comment</button>-->
       </div>
@@ -63,9 +66,11 @@
 <% @comments.each do |comment| %>
   <div class="media">
     <div class="media-body">
-      <h4 class="media-heading" id="<%= 'comment-no-'+comment.id.to_s %>"><%= comment.user.email %></h4>
+      <h5 class="media-heading" id="<%= 'comment-no-'+comment.id.to_s %>"><em><%= comment.user.email %></em></h5>
       <%= comment.content %>
     </div>
   </div>
 <% end %>
+
+<br>
 <%= link_to 'Back', products_path %>
