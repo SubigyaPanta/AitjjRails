@@ -4,3 +4,9 @@
 .price{
   color: green;
 }
+.comment{
+  cursor: pointer;
+  &:active{
+    box-shadow: inset 0 0 5px;
+  }
+}

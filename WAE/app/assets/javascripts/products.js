@@ -1,5 +1,5 @@
 (function($){
-    $(document).on('ready turbolinks:load', function () {
+    $(document).on('turbolinks:load', function () {
         var requestRunning = false;
 
         function showMessage(messageBoxId, messageText, containerClass){
@@ -9,13 +9,13 @@
             msg.html(messageText);
 
             // clear it incase it not empty
-            container.empty();
+            container.show();
             container.append(msg);
 
             // make it fadeout and disappear after 5 seconds
             setTimeout(function () {
                 container.fadeOut('slow', function () {
-                    //container.empty();
+                    container.empty();
                 })
             }, 5000)
         }
