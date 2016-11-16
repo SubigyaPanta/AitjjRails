@@ -5,6 +5,8 @@ class Product < ApplicationRecord
   has_many :product_categories
   has_many :categories, through: :product_categories
 
+  has_many :comments
+
   # has_attached_file :photo
   # accepts_nested_attributes_for :product_photos
   validates :name, presence: true
