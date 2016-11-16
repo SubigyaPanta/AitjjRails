@@ -84,31 +84,31 @@
   <!--</thead>-->
 
   <!--<tbody>-->
-    <!--<% @products.each do |product| %>-->
+    <!--<%# @products.each do |product| %>-->
       <!--<tr>-->
-        <!--<td><%= product.name %></td>-->
-        <!--<td><%= product.description %></td>-->
-        <!--<td><%= product.features %></td>-->
-        <!--<td><%= product.product_no %></td>-->
-        <!--<td><%= product.is_deleted %></td>-->
-        <!--<td><%= product.is_published %></td>-->
-        <!--<td><%= product.color %></td>-->
-        <!--<td><%= product.standard_cost %></td>-->
-        <!--<td><%= product.selling_price %></td>-->
-        <!--<td><%= product.weight %></td>-->
-        <!--<td><%= product.user %></td>-->
-        <!--<td><%= product.quantity_total %></td>-->
-        <!--<td><%= product.quantity_sold %></td>-->
-        <!--<td><%= product.sell_start_date %></td>-->
-        <!--<td><%= product.sell_end_date %></td>-->
-        <!--<% unless product.product_photos.first.nil?  %>-->
-          <!--<td><%= image_tag product.product_photos.first.link.to_s %></td>-->
-        <!--<% end %>-->
-        <!--<td><%= link_to 'Show', product %></td>-->
-        <!--<td><%= link_to 'Edit', edit_product_path(product) %></td>-->
-        <!--<td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+        <!--<td><%#= product.name %></td>-->
+        <!--<td><%#= product.description %></td>-->
+        <!--<td><%#= product.features %></td>-->
+        <!--<td><%#= product.product_no %></td>-->
+        <!--<td><%#= product.is_deleted %></td>-->
+        <!--<td><%#= product.is_published %></td>-->
+        <!--<td><%#= product.color %></td>-->
+        <!--<td><%#= product.standard_cost %></td>-->
+        <!--<td><%#= product.selling_price %></td>-->
+        <!--<td><%#= product.weight %></td>-->
+        <!--<td><%#= product.user %></td>-->
+        <!--<td><%#= product.quantity_total %></td>-->
+        <!--<td><%#= product.quantity_sold %></td>-->
+        <!--<td><%#= product.sell_start_date %></td>-->
+        <!--<td><%#= product.sell_end_date %></td>-->
+        <!--<#% unless product.product_photos.first.nil?  %>-->
+          <!--<td><%#= image_tag product.product_photos.first.link.to_s %></td>-->
+        <!--<%# end %>-->
+        <!--<td><%#= link_to 'Show', product %></td>-->
+        <!--<td><%#= link_to 'Edit', edit_product_path(product) %></td>-->
+        <!--<td><%#= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
       <!--</tr>-->
-    <!--<% end %>-->
+    <!--<%# end %>-->
   <!--</tbody>-->
 <!--</table>-->
 
