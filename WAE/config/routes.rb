@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :user do
+    # get 'dashboard/index'
+    get 'dashboard', to: 'dashboard#index'
+  end
+
   resources :comments
   get 'categories/index'
 

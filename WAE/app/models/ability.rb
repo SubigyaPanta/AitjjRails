@@ -45,6 +45,7 @@ class Ability
       #   Rails.logger.info p.inspect
       #   p.user_id == user.id
       # end
+      can :read, User::Dashboard
       Rails.logger.info user.inspect
       # puts user.id
       can :read, Category, :is_deleted => false
