@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109172202) do
+ActiveRecord::Schema.define(version: 20161117135248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 20161109172202) do
     t.text     "description"
     t.json     "features"
     t.string   "product_no"
-    t.boolean  "is_deleted"
-    t.boolean  "is_published"
+    t.boolean  "is_deleted",                              default: false
+    t.boolean  "is_published",                            default: true
     t.string   "color"
     t.decimal  "standard_cost",   precision: 8, scale: 2
     t.decimal  "selling_price",   precision: 8, scale: 2
@@ -82,8 +82,8 @@ ActiveRecord::Schema.define(version: 20161109172202) do
     t.integer  "quantity_sold"
     t.date     "sell_start_date"
     t.date     "sell_end_date"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
     t.index ["user_id"], name: "index_products_on_user_id", using: :btree
   end
 
