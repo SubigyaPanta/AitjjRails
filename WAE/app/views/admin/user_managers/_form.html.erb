@@ -20,12 +20,12 @@
       </dl>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label 'role', 'Role' %>
-      <%= f.collection_select('role', roles, :id, :name) %>
+      <%= f.collection_select('role', roles, :id, :name, {}, {:class => 'form-control'}) %>
     </div>
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit 'Submit', {:class => 'btn btn-primary'} %>
     </div>
 <% end %>
