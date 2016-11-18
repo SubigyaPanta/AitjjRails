@@ -1,0 +1,2 @@
+module PsSixHelper
+end

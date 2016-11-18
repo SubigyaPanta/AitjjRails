@@ -83,6 +83,14 @@ Rails.application.routes.draw do
   get 'ps_five' => 'ps_five#index'
   get 'ps_five/documentation', to: 'ps_five#documentation'
 
+
+  get 'ps_six' => 'ps_six#index'
+  get 'ps_six/web-10-review' => 'ps_six#web10'
+  get 'ps_six/web-11-review' => 'ps_six#web11'
+  get 'ps_six/feedback-by-customer' => 'ps_six#customer'
+  get 'ps_six/feedback-by-web-14' => 'ps_six#feedback_web14'
+  get 'ps_six/feedback-by-web-17' => 'ps_six#feedback_web17'
+
   get 'admin', to: 'admin#index'
 
   #get 'home/index'
