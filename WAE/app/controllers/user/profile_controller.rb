@@ -6,14 +6,19 @@ class User::ProfileController < ApplicationController
   end
 
   def edit_contact
-    @contact.phone = params[:contact][:phone]
-    @contact.facebook = params[:contact][:facebook]
-    @contact.twitter = params[:contact][:twitter]
-    @contact.google = params[:contact][:google]
+    update_fields = {phone: params[:contact][:phone],
+                     facebook: params[:contact][:facebook],
+                     twitter: params[:contact][:twitter],
+                     google: params[:contact][:google]}
 
-    puts @contact.inspect
-    respond_to do |format|
-      format.html { render :index, notice: 'Profile updated' }
+    if @contact.update(update_fields)
+      respond_to do |format|
+        format.html { redirect_to action: 'index', notice: 'Profile updated' }
+      end
+    else
+      respond_to do |format|
+        format.html { render :index, notice: 'Profile was not updated' }
+      end
     end
   end
 
