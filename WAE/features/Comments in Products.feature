@@ -12,3 +12,13 @@ Feature: Ability to add comments
     When I try to comment on a product
     Then I should be able to add a comment
 
+
+  Scenario: A registered User added a comment successfully.
+
+    Given I log in as a registered user
+    And I try to comment on a product
+    And I should be able to add a comment
+
+    When Owner visits his dashboard
+    Then He should see notification about new comment
+

@@ -10,6 +10,7 @@ class User < ApplicationRecord
   # has_and_belongs_to_many :roles
   has_many :products
   has_many :comments
+  has_one :contact
   # before_save :set_default_role
   before_create :set_default_role
 

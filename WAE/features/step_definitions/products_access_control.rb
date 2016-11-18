@@ -77,11 +77,31 @@ When(/^I try to comment on a product/) do
   visit products_path
   fill_in 'product-'+@prods[1].id.to_s, with: 'My comment'
   find(:css, '#button-'+@prods[1].id.to_s).click
-  save_and_open_page
+
+  page.evaluate_script("            $.ajax({
+                url: window.location.origin + '/comments.json',
+                method: 'post',
+                dataType: 'json',
+                data: {
+                    comment: {
+                        content: 'My comment',
+                        product_id: id
+                    }
+                }
+});")
+
 end
 
 Then(/^I should not be able to add a comment$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  # find(:css, '#alert-container-'+@prods[1].id.to_s )
+  # save_and_open_page
+  # Has no child elements
+  visit product_path(@prods[1])
+  puts product_path(@prods[1])
+  save_and_open_page
+  find('#alert-container-'+@prods[1].id.to_s + ' div:nth-child(1)').all('*').length.should == 0
+  # Has no text
+  find('#alert-container-'+@prods[1].id.to_s + ' div:nth-child(1)').text.should == ''
 end
 
 Then(/^I should be redirected to login page with a message$/) do

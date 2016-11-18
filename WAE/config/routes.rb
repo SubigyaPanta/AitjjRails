@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
 
+  # namespace :user do
+  #   get 'profile/index'
+  # end
+
   namespace :user do
     # get 'dashboard/index'
     get 'dashboard', to: 'dashboard#index'
+
+    get 'profile', to: 'profile#index'
+    put 'profile/edit_contact' => 'profile#edit_contact', as: :edit_contact
   end
 
   resources :comments

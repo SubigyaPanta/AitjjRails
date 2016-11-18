@@ -30,3 +30,28 @@ Then(/^I should see my basic activity summary\.$/) do
   # find(:css, '#activity-summary ul li:nth-child(2)').text.should == 'Total Comments'
   # find(:css, '#activity-summary ul li:nth-child(3)').text.should == 'Last SignIn'
 end
+
+When(/^Owner visits his dashboard$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^He should see notification about new comment$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I visit my profile$/) do
+  visit user_profile_path
+  find(:css, 'h1').text.should == 'Profile'
+end
+
+Then(/^I should see my profile$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I try to edit my profile$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should be able to edit my profile$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
