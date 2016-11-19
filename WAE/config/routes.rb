@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     put 'profile/edit_contact' => 'profile#edit_contact', as: :edit_contact
   end
 
-  resources :comments
+  resources :comments, only: [:create, :destroy]
   get 'categories/index'
 
   get 'categories/create'

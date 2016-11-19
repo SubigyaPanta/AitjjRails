@@ -20,6 +20,7 @@
             }, 5000)
         }
 
+        // Add Comment
         $('.comment').on('click', function(){
             var $self = $(this);
             var id = $self.data('product');
@@ -65,7 +66,34 @@
                     $('#product-'+id).val('');
                     requestRunning = false;
                 }
-            })
-        })
+            });
+        });
+
+        // Delete Comment
+        $('#comment-container').on('click', '.delete-comment', function () {
+            var sure = confirm('Are you sure you want to delete the comment ?');
+            if(sure){
+                $self = $(this);
+                var id = $self.data('id');
+                var link = $self.data('link');
+                console.log(id);
+                $.ajax({
+                    url: window.location.origin + link,
+                    method: 'post',
+                    data: {
+                        _method: 'delete'
+                    },
+                    success: function () {
+                        $('#media-'+id).remove();
+                    },
+                    error: function () {
+
+                    },
+                    complete: function () {
+
+                    }
+                });
+            }
+        });
     })
 })(jQuery);

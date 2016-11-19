@@ -41,6 +41,7 @@ class Ability
       # can :update, Product, :user_id => user.id
       can [:edit, :update], Product, :user_id => user.id
       can [:create, :read], Comment
+      can [:update, :destroy], Comment, :user_id => user.id
       # can [:edit, :update], Product do |p|
       #   Rails.logger.info p.inspect
       #   p.user_id == user.id

@@ -67,15 +67,27 @@
     </div>
   </div>
 </div>
-<h3 id="comments">Comments</h3>
-<% @comments.each do |comment| %>
-  <div class="media">
-    <div class="media-body">
-      <h5 class="media-heading" id="<%= 'comment-no-'+comment.id.to_s %>"><em><%= comment.user.email %></em></h5>
-      <%= comment.content %>
-    </div>
-  </div>
-<% end %>
+<div id="comment-container">
+  <h3 id="comments">Comments</h3>
+  <% @comments.each do |comment| %>
+      <div class="media" id="media-<%= comment.id.to_s %>">
+        <div class="media-body">
+          <h5 class="media-heading" id="<%= 'comment-no-'+comment.id.to_s %>">
+            <em><%= comment.user.email %></em>
+            <% if can? :destroy, comment %>
+              <button class="pull-right delete-comment btn btn-danger btn-xs" data-id="<%= comment.id.to_s %>"
+                      data-link="<%= comment_path(comment) %>"
+                      data-toggle="tooltip"
+                      data-placement="top" title="Delete Comment">
+                <span class="glyphicon glyphicon-remove"></span>
+              </button>
+            <% end %>
+          </h5>
+          <%= comment.content %>
+        </div>
+      </div>
+  <% end %>
+</div>
 
 <br>
 <%= link_to 'Back', products_path %>

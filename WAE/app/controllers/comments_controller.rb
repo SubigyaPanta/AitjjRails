@@ -24,10 +24,26 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+
+  end
+
+  def destroy
+    @comment.destroy
+    respond_to do |format|
+      # format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
 
   private
 
   def comment_params
     params.require(:comment).permit(:content, :product_id)
+    # params.permit(:comment => {})
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 end
