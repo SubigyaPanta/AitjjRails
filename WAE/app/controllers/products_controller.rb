@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.where(:is_published => true)
+    @products = Product.where(:is_published => true).order(:created_at).reverse_order
   end
 
   # GET /products/1
