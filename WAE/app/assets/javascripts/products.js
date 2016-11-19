@@ -95,5 +95,8 @@
                 });
             }
         });
+
+        // Enable Tooltip
+        $('.user-tip').tooltip();
     })
 })(jQuery);

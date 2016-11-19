@@ -62,7 +62,7 @@
         <div class="panel-footer">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
-            <input type="text" id="<%= 'product-'+product.id.to_s %>" class="form-control" placeholder="Add Comment" aria-describedby="<%= product.id %>" <% unless (defined?(user_signed_in)).nil? && user_signed_in?  %>
+            <input type="text" id="<%= 'product-'+product.id.to_s %>" class="form-control user-tip" placeholder="Add Comment" aria-describedby="<%= product.id %>" <% unless (defined?(user_signed_in)).nil? && user_signed_in?  %>
                    data-toggle="tooltip" data-placement="top" title="You need to be logged in to comment" <% end %>/>
             <span id="button-<%= product.id.to_s %>" class="input-group-addon comment" data-product="<%= product.id %>"
                   data-link="<%= product_path(product) %>">

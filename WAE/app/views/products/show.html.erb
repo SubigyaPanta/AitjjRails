@@ -75,7 +75,7 @@
           <h5 class="media-heading" id="<%= 'comment-no-'+comment.id.to_s %>">
             <em><%= comment.user.email %></em>
             <% if can? :destroy, comment %>
-              <button class="pull-right delete-comment btn btn-danger btn-xs" data-id="<%= comment.id.to_s %>"
+              <button class="pull-right delete-comment btn btn-danger btn-xs user-tip" data-id="<%= comment.id.to_s %>"
                       data-link="<%= comment_path(comment) %>"
                       data-toggle="tooltip"
                       data-placement="top" title="Delete Comment">
