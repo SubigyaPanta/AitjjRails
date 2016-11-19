@@ -55,6 +55,11 @@
 
     </div>
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :is_sold %> Is Sold
+        </label>
+      </div>
       <div class="form-group">
         <%= f.label :standard_cost %>
         <%= f.text_field :standard_cost, :class => 'form-control' %>
@@ -76,14 +81,11 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :quantity_sold %>
-        <%= f.number_field :quantity_sold, :class => 'form-control' %>
-      </div>
-
-      <div class="form-group">
         <%= f.label :product_no %>
         <%= f.text_field :product_no, :class => 'form-control' %>
       </div>
+
+
     </div>
   </div>
 
