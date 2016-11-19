@@ -47,14 +47,15 @@
           <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <strong>Description</strong>
             <p>
-              <%= product.description %>
+              <%= truncate( product.description, length: 250) %>
+              <%= link_to 'Read More..', product %>
             </p>
           </div>
         </div>
 
         <!-- Show comment link if there are comments -->
         <% if product.comments.size > 0 %>
-          <%= link_to "See comments by others.. (#{product.comments.size} comments)", product_path(product) + '#comments', :class => '.comment-link' %>
+          <%= link_to "See comments by others.. (#{pluralize(product.comments.size, 'comment')})", product_path(product) + '#comments', :class => '.comment-link' %>
         <% else %>
           <span>Be the first to comment..</span>
         <% end %>
