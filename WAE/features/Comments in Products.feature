@@ -22,3 +22,12 @@ Feature: Ability to add comments
     When Owner visits his dashboard
     Then He should see notification about new comment
 
+
+  Scenario: A user wants to see comments on a product
+
+    Given I log in as a registered user
+    And I visit product page
+    Then I should see a link to view comments
+    When I click on the link
+    Then Then I should be able to read comments
+

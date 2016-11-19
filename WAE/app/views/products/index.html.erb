@@ -47,6 +47,13 @@
           </div>
         </div>
 
+        <!-- Show comment link if there are comments -->
+        <% if product.comments.size > 0 %>
+          <%= link_to "See comments by others.. (#{product.comments.size} comments)", product_path(product) + '#comments', :class => '.comment-link' %>
+        <% else %>
+          <span>Be the first to comment..</span>
+        <% end %>
+
         <div class="panel-footer">
           <div class="input-group">
             <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>

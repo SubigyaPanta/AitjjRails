@@ -83,6 +83,19 @@ FactoryGirl.define do
     # product_photos {FactoryGirl.build :product_photos}
   end
 
+  factory :comment do
+    content 'Comment content'
+    user
+  end
+
+  trait :with_comments do
+    ignore do
+      number_of_comments 3
+    end
+    after :create do |product, evaluator|
+      FactoryGirl.create_list :comment, evaluator.number_of_comments, :product => product
+    end
+  end
   # trait :with_user do
   #   ignore do
   #     user :AdminUser
