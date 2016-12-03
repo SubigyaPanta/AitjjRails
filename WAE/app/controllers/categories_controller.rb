@@ -17,8 +17,8 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.save
         puts @category.inspect
-
-        format.html { redirect_to @category, notice: 'Quotation was successfully created.' }
+        # redirect_back(fallback_location: root_path)
+        format.html { redirect_to new_product_path, notice: 'Category was successfully created.' }
         # format.json { render :show, status: :created, location: @category }
       else
         format.html { render :new }

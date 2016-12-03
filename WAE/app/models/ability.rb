@@ -51,6 +51,7 @@ class Ability
       # Rails.logger.info user.inspect
       # puts user.id
       can :read, Category, :is_deleted => false
+      can :create, Category
       cannot :read, [Admin, Admin::UserManager]
     elsif user.role? == 'blocked'
       can :read, Product
