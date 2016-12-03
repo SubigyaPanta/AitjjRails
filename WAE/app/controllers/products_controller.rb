@@ -17,8 +17,9 @@ class ProductsController < ApplicationController
         @products = Product.joins(:categories)
                         .where(:is_published => true)
                         .where("products.name ILIKE :name", :name => "%#{name}%")
-                        .where(:categories => {:name => category})
+                        .where("categories.name ILIKE :cat_name", :cat_name => "%#{category}")
                         .order(:created_at).reverse_order
+                      # .where(:categories => {:name => category})
       elsif !name.blank?
         # where_clause += ' name ILIKE :name '
         @products = Product.where(:is_published => true)
@@ -26,7 +27,8 @@ class ProductsController < ApplicationController
       elsif !category.blank?
         @products = Product.joins(:categories)
                         .where(:is_published => true)
-                        .where(:categories => {:name => category}).order(:created_at).reverse_order
+                        .where("categories.name ILIKE :cat_name", :cat_name => "%#{category}")
+                        .order(:created_at).reverse_order
       else
         @products = Product.where(:is_published => true).order(:created_at).reverse_order
       end
