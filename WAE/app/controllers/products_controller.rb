@@ -7,31 +7,31 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    if params[:product].nil?
-        @products = Product.where(:is_published => true).order(:created_at).reverse_order
+    index_params
+    set_sessions_and_page
+
+    if !@@product_name.blank? && !@@product_category.blank?
+      @products = Product.joins(:categories)
+                      .where(:is_published => true)
+                      .where("products.name ILIKE :name", :name => "%#{@@product_name}%")
+                      .where("categories.name ILIKE :cat_name", :cat_name => "%#{@@product_category}")
+                      .paginate(:page => @@page)
+                      .order(:created_at).reverse_order
+                    # .where(:categories => {:name => category})
+    elsif !@@product_name.blank?
+      # where_clause += ' name ILIKE :name '
+      @products = Product.where(:is_published => true)
+                      .where("name ILIKE :name", :name => "%#{@@product_name}%")
+                      .paginate(:page => @@page)
+                      .order(:created_at).reverse_order
+    elsif !@@product_category.blank?
+      @products = Product.joins(:categories)
+                      .where(:is_published => true)
+                      .where("categories.name ILIKE :cat_name", :cat_name => "%#{@@product_category}")
+                      .paginate(:page => @@page)
+                      .order(:created_at).reverse_order
     else
-      session[:product_name] = name = params[:product][:name].nil? ? '' : params[:product][:name]
-      session[:product_category] = category = params[:product][:category].nil? ? '' : params[:product][:category]
-      # where_clause = ' is_published = true '
-      if !name.blank? && !category.blank?
-        @products = Product.joins(:categories)
-                        .where(:is_published => true)
-                        .where("products.name ILIKE :name", :name => "%#{name}%")
-                        .where("categories.name ILIKE :cat_name", :cat_name => "%#{category}")
-                        .order(:created_at).reverse_order
-                      # .where(:categories => {:name => category})
-      elsif !name.blank?
-        # where_clause += ' name ILIKE :name '
-        @products = Product.where(:is_published => true)
-                          .where("name ILIKE :name", :name => "%#{name}%").order(:created_at).reverse_order
-      elsif !category.blank?
-        @products = Product.joins(:categories)
-                        .where(:is_published => true)
-                        .where("categories.name ILIKE :cat_name", :cat_name => "%#{category}")
-                        .order(:created_at).reverse_order
-      else
-        @products = Product.where(:is_published => true).order(:created_at).reverse_order
-      end
+      @products = Product.where(:is_published => true).paginate(:page => @@page).order(:created_at).reverse_order
     end
   end
 
@@ -120,7 +120,19 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       default = params
-      params.require(:product).permit(:name, :description, :features, :product_no, :is_deleted, :is_published, :color, :standard_cost, :selling_price, :weight, :user_id, :quantity_total, :quantity_sold, :sell_start_date, :sell_end_date, :is_sold, :category, :product_photos => [:link], :category_ids => [])
+      params.require(:product).permit(:name, :description, :features, :product_no, :is_deleted, :is_published, :color, :standard_cost, :selling_price, :weight, :user_id, :quantity_total, :quantity_sold, :sell_start_date, :sell_end_date, :is_sold, :product_photos => [:link], :category_ids => [])
       # params.require([:product, :product_photo]).permit(:name, :description, :features, :product_no, :is_deleted, :is_published, :color, :standard_cost, :selling_price, :weight, :user_id, :quantity_total, :quantity_sold, :sell_start_date, :sell_end_date, :link, :category_ids => [])
+    end
+
+    def index_params
+      # params[:page] = params[:page].nil? ? 0 : params[:page]
+      #, :category, :page
+      params.permit(:page, :product_name, :product_category)
+    end
+
+    def set_sessions_and_page
+      @@page = params[:page]
+      session[:product_name] = @@product_name = params[:product_name].nil? ? '' : params[:product_name]
+      session[:product_category] = @@product_category = params[:product_category].nil? ? '' : params[:product_category]
     end
 end

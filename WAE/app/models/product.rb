@@ -11,4 +11,7 @@ class Product < ApplicationRecord
   # accepts_nested_attributes_for :product_photos
   validates :name, presence: true
   validates :selling_price, presence: true
+
+  # For pagination
+  self.per_page = 10
 end
