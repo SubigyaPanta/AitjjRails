@@ -57,6 +57,7 @@
                     var container;
                     // only on show page
                     if(container = $('#comment-container')){
+                        var medias = $('.media', response.media_html)
                         $('#comment-container').prepend(medias);
                     }
                     showMessage(id, 'Comment Posted. <a class="alert-link" href="'+link+'#comment-no-'+response.id+'">Click Here to see your comment</a>', 'alert alert-success');
