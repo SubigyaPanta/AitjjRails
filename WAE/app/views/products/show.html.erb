@@ -55,8 +55,8 @@
       <div class="panel-footer">
         <div class="input-group">
           <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
-          <input type="text" id="<%= 'product-'+@product.id.to_s %>" class="form-control" placeholder="Add Comment" aria-describedby="<%= @product.id %>" <% unless (defined?(user_signed_in)).nil? && user_signed_in?  %>
-                 data-toggle="tooltip" data-placement="top" title="You need to be logged in to comment" <% end %>/>
+          <input type="text" id="<%= 'product-'+@product.id.to_s %>" class="form-control user-tip" placeholder="Add Comment"
+                 aria-describedby="<%= @product.id %>" <%= show_tooltip_on_not_logged_in "You need to be logged in to comment" %>/>
           <span id="button-<%= @product.id.to_s %>" class="input-group-addon comment" data-product="<%= @product.id %>"
                 data-link="<%= product_path(@product) %>">
             <span>Comment</span>
@@ -70,22 +70,7 @@
 <div id="comment-container">
   <h3 id="comments">Comments</h3>
   <% @comments.each do |comment| %>
-      <div class="media" id="media-<%= comment.id.to_s %>">
-        <div class="media-body">
-          <h5 class="media-heading" id="<%= 'comment-no-'+comment.id.to_s %>">
-            <em><%= comment.user.email %></em>
-            <% if can? :destroy, comment %>
-              <button class="pull-right delete-comment btn btn-danger btn-xs user-tip" data-id="<%= comment.id.to_s %>"
-                      data-link="<%= comment_path(comment) %>"
-                      data-toggle="tooltip"
-                      data-placement="top" title="Delete Comment">
-                <span class="glyphicon glyphicon-remove"></span>
-              </button>
-            <% end %>
-          </h5>
-          <%= comment.content %>
-        </div>
-      </div>
+    <%= render 'shared/comment', comment: comment %>
   <% end %>
 </div>
 
