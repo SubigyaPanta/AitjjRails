@@ -1,0 +1,16 @@
+<div class="media" id="media-<%= comment.id.to_s %>">
+  <div class="media-body">
+    <h5 class="media-heading" id="<%= 'comment-no-'+comment.id.to_s %>">
+      <em><%= comment.user.email %></em>
+      <% if can? :destroy, comment %>
+          <button class="pull-right delete-comment btn btn-danger btn-xs user-tip" data-id="<%= comment.id.to_s %>"
+                  data-link="<%= comment_path(comment) %>"
+                  data-toggle="tooltip"
+                  data-placement="top" title="Delete Comment">
+            <span class="glyphicon glyphicon-remove"></span>
+          </button>
+      <% end %>
+    </h5>
+    <%= comment.content %>
+  </div>
+</div>
