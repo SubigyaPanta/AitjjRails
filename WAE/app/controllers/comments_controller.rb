@@ -9,10 +9,11 @@ class CommentsController < ApplicationController
       @comment = Comment.new :content => params[:comment][:content]
       @comment.product = product
       @comment.user = user
-
       respond_to do |format|
         if @comment.save
-          # format.html { redirect_to @product, notice: 'Product was successfully created.' }
+          media_html = render_to_string file: 'shared/_comment.html.erb', locals: {:comment => @comment}
+          # format.html { render 'shared/comment', comment: @comment }
+          @comment_json = {id: @comment.id, content: @comment.content, media_html: media_html}
           format.json { render :create, status: :created }
         else
           # format.html { render :new }

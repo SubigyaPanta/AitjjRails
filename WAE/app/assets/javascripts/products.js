@@ -53,7 +53,12 @@
                 },
                 success: function (response, textStatus, jqXHR) {
                     //<div class="alert alert-success" role="alert">...</div>
-                    console.log(response, textStatus, jqXHR);
+                    // console.log(response, textStatus, jqXHR);
+                    var container;
+                    // only on show page
+                    if(container = $('#comment-container')){
+                        $('#comment-container').prepend(medias);
+                    }
                     showMessage(id, 'Comment Posted. <a class="alert-link" href="'+link+'#comment-no-'+response.id+'">Click Here to see your comment</a>', 'alert alert-success');
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
