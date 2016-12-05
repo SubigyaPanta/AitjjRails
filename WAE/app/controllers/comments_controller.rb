@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
 
     message = MessageTemplate.find_by(name: 'comment')
     puts message.inspect
-    notification = Notification.create(message_template: message, receiver: product_owner, sender: commenter, url: product_path(comment.product))
+    notification = Notification.create(message_template: message, receiver: product_owner, sender: commenter, url: product_path(comment.product) + '#comment-no-' + comment.id.to_s)
     puts notification.inspect
   end
 
