@@ -10,9 +10,16 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <%= render "shared/menu" %>
-    <div class="container">
-      <%= yield %>
+    <div class="wrapper">
+      <%= render "shared/menu" %>
+      <div class="container">
+        <%= yield %>
+      </div>
     </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted well-sm">By Subigya Jyoti Panta. st118492</p>
+      </div>
+    </footer>
   </body>
 </html>
