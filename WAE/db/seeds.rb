@@ -22,3 +22,7 @@ defaultAdmin.password_confirmation = 'password123'
 defaultAdmin.role = ad
 # puts defaultAdmin.inspect
 defaultAdmin.save
+
+msg_temp = MessageTemplate.find_or_initialize_by(name: 'comment')
+msg_temp.message = '[:sender] added a comment on your product.'
+msg_temp.save

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :message_templates
   # namespace :user do
   #   get 'profile/index'
   # end

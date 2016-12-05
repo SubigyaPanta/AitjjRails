@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161119070219) do
+ActiveRecord::Schema.define(version: 20161205051233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 20161119070219) do
     t.index ["user_id"], name: "index_contacts_on_user_id", using: :btree
   end
 
+  create_table "message_templates", force: :cascade do |t|
+    t.string   "name"
+    t.string   "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_message_templates_on_name", unique: true, using: :btree
+  end
+
   create_table "my_stocks", id: false, force: :cascade do |t|
     t.string  "symbol",        limit: 20, null: false
     t.integer "n_shares",                 null: false
@@ -55,6 +63,19 @@ ActiveRecord::Schema.define(version: 20161119070219) do
     t.string  "symbol",        limit: 20, null: false
     t.integer "n_shares",                 null: false
     t.date    "date_acquired",            null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "message_templates_id"
+    t.string   "url"
+    t.integer  "receiver_id"
+    t.integer  "sender_id"
+    t.boolean  "is_seen"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["message_templates_id"], name: "index_notifications_on_message_templates_id", using: :btree
+    t.index ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
+    t.index ["sender_id"], name: "index_notifications_on_sender_id", using: :btree
   end
 
   create_table "product_categories", force: :cascade do |t|
@@ -163,6 +184,9 @@ ActiveRecord::Schema.define(version: 20161119070219) do
 
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
+  add_foreign_key "notifications", "message_templates", column: "message_templates_id"
+  add_foreign_key "notifications", "users", column: "receiver_id"
+  add_foreign_key "notifications", "users", column: "sender_id"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
   add_foreign_key "product_photos", "products"
