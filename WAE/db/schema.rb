@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(version: 20161205051233) do
     t.string   "url"
     t.integer  "receiver_id"
     t.integer  "sender_id"
-    t.boolean  "is_seen"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.boolean  "is_seen",              default: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.index ["message_templates_id"], name: "index_notifications_on_message_templates_id", using: :btree
     t.index ["receiver_id"], name: "index_notifications_on_receiver_id", using: :btree
     t.index ["sender_id"], name: "index_notifications_on_sender_id", using: :btree

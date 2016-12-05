@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
       @comment.user = user
       respond_to do |format|
         if @comment.save
+          send_notification @comment
           media_html = render_to_string file: 'shared/_comment.html.erb', locals: {:comment => @comment}
           # format.html { render 'shared/comment', comment: @comment }
           @comment_json = {id: @comment.id, content: @comment.content, media_html: media_html}
@@ -38,6 +39,17 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def send_notification(comment)
+    puts 'sending notification..'
+    product_owner = comment.product.user
+    commenter = comment.user
+
+    message = MessageTemplate.find_by(name: 'comment')
+    puts message.inspect
+    notification = Notification.create(message_template: message, receiver: product_owner, sender: commenter, url: product_path(comment.product))
+    puts notification.inspect
+  end
 
   def comment_params
     params.require(:comment).permit(:content, :product_id)

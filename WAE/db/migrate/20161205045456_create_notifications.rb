@@ -5,7 +5,7 @@ class CreateNotifications < ActiveRecord::Migration[5.0]
       t.string :url
       t.references :receiver, references: :users
       t.references :sender, references: :users
-      t.boolean :is_seen
+      t.boolean :is_seen, default: false
 
       t.timestamps
     end
