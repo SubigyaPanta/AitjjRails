@@ -47,6 +47,7 @@ class Ability
       #   p.user_id == user.id
       # end
       can :read, User::Dashboard
+      can :notification, User::Dashboard
       can [:read, :edit_contact], User::Profile
       # Rails.logger.info user.inspect
       # puts user.id

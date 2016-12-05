@@ -1,0 +1,23 @@
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>SN</th>
+      <th>Notifications</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% i=1
+       @notifications.each do |notification|
+    %>
+      <tr>
+        <td><%= i %></td>
+        <td><%= link_to replace_sender_with(notification.message_template.message, notification.sender.email), notification.url %></td>
+      </tr>
+    <% i=i+1
+       end
+    %>
+    <% if @notifications.empty? %>
+      You have no new notification
+    <% end %>
+  </tbody>
+</table>

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :user do
     # get 'dashboard/index'
     get 'dashboard', to: 'dashboard#index'
+    get 'notifications', to: 'dashboard#notification'
 
     get 'profile', to: 'profile#index'
     put 'profile/edit_contact' => 'profile#edit_contact', as: :edit_contact

@@ -9,7 +9,8 @@
       <ul class="list-group">
         <li class="list-group-item">Total Posts<span class="badge"><%= @products.size %></span></li>
         <li class="list-group-item">Total Comments<span class="badge"><%= @user.comments.size %></span></li>
-        <li class="list-group-item">Last SignIn<span class="badge"><%= time_ago_in_words (Time.at(@user.current_sign_in_at)) %></span></li>
+        <li class="list-group-item">Last SignIn<span class="badge"><%= time_ago_in_words (Time.at(@user.current_sign_in_at)) %></span>
+        <li class="list-group-item"><%= link_to 'Notification', user_notifications_path%><span class="badge"><%= @notification_count %></span></li>
       </ul>
     </div>
   </div>
