@@ -17,7 +17,7 @@
       <ul class="nav navbar-nav">
         <li><%= link_to 'Assignment', assignments_path %></li>
       </ul>
-      <%= form_tag({controller: "products", action: "index"}, method: "get", class: "navbar-form navbar-left", id: 'product-search' ) do %>
+      <%= form_tag(products_path, method: "get", class: "navbar-form navbar-left", id: 'product-search' ) do %>
         <div class="form-group">
           <input id="product_name" name="product_name" type="text" class="form-control" value="<%= search_product_query %>" placeholder="Search Product">
           <input id="product_category" name="product_category" type="text" class="form-control" value="<%= search_product_category %>" placeholder="Product Category">
