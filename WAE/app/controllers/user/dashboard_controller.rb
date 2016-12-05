@@ -14,5 +14,6 @@ class User::DashboardController < ApplicationController
     @notifications = Notification.where(receiver: current_user)
                                 .where.not(sender: current_user)
                                 .where(is_seen: false)
+                                .take(100)
   end
 end
