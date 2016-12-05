@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
       @products = Product.joins(:categories)
                       .where(:is_published => true)
                       .where("products.name ILIKE :name", :name => "%#{@@product_name}%")
-                      .where("categories.name ILIKE :cat_name", :cat_name => "%#{@@product_category}")
+                      .where("categories.name ILIKE :cat_name", :cat_name => "%#{@@product_category}%")
                       .paginate(:page => @@page)
                       .order(:created_at).reverse_order
                     # .where(:categories => {:name => category})
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
     elsif !@@product_category.blank?
       @products = Product.joins(:categories)
                       .where(:is_published => true)
-                      .where("categories.name ILIKE :cat_name", :cat_name => "%#{@@product_category}")
+                      .where("categories.name ILIKE :cat_name", :cat_name => "%#{@@product_category}%")
                       .paginate(:page => @@page)
                       .order(:created_at).reverse_order
     else
