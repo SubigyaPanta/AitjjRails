@@ -13,5 +13,5 @@ class Product < ApplicationRecord
   validates :selling_price, presence: true
 
   # For pagination
-  self.per_page = 10
+  self.per_page = 5
 end
